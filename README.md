@@ -1,6 +1,6 @@
 # Projeto_Ebook_VIISER
 
-Instruções para produção do e-book VII SER
+Instruções para produção do e-book VII SER com ISBN e ficha catalográfica.
 
 Palestrantes do VII SER estão convidados a produzir um capítulo sobre o assunto de sua palestra proferida no seminário. Organizamos um modelo para envio do capítulo. Nossa equipe se encarregará de produzir um compilado do material enviado. 
 
