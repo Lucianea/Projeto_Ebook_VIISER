@@ -12,11 +12,15 @@ O arquivo qmd, figuras e tabelas devidamente nomeadas deve ser enviado até o di
 
 # Organizadores
 
-Orlando Celso Longo
-
 Luciane Ferreira Alcoforado
 
 João Paulo Martins dos Santos
+	
+Orlando Celso Longo
+	
+Ariel Levy
+	
+Juan Lopez Linares
 
 # Palestrantes do VII SER
 
