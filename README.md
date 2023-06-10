@@ -4,9 +4,14 @@ Instruções para produção do e-book VII SER com ISBN e ficha catalográfica.
 
 Palestrantes do VII SER estão convidados a produzir um capítulo sobre o assunto de sua palestra proferida no seminário. Organizamos um modelo para envio do capítulo. Nossa equipe se encarregará de produzir um compilado do material enviado. 
 
-Somente serão aceitos arquivos enviados dentro do prazo estipulado e seguindo as orientações do modelo disponibilizado.
+Somente serão aceitos arquivos enviados dentro do prazo estipulado e seguindo as orientações do modelo disponibilizado neste repositório (utilizar arquivo ModelSER2023.qmd como template), leia o arquivo gerado a partir do template ModelSER2023.pdf. Realize as adpatações necessárias para produzir seu capítulo. Evite termos como "nessa palestra" ou "nesse trabalho" pois trata-se de um capítulo de livro.
+
+# Prazos
+
+O arquivo qmd, figuras e tabelas devidamente nomeadas deve ser enviado até o dia **12/07/2023** para <email>. A previsão da publicação é estimada em 60 dias.
 
 # Organizadores
+
 Orlando Celso Longo
 
 Luciane Ferreira Alcoforado
