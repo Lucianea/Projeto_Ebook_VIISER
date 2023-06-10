@@ -8,7 +8,7 @@ Somente serão aceitos arquivos enviados dentro do prazo estipulado e seguindo a
 
 # Prazos
 
-O arquivo qmd, figuras e tabelas devidamente nomeadas deve ser enviado até o dia **12/07/2023** para <email>. A previsão da publicação é estimada em 60 dias.
+O arquivo qmd, figuras e tabelas devidamente nomeadas devem ser enviados até o dia **12/07/2023** para sua pasta individual criada neste repositório. A previsão da publicação é estimada em 60 dias.
 
 # Organizadores
 
