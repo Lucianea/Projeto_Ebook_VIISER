@@ -197,7 +197,7 @@ A árvore hieráquica é obtida rapidamente utilizando-se o código a seguir, cu
 AHPWR::flow_chart(names=NULL, c=3, a=4)
 ```
 
-![Árvore Hierárquica do exemplo 1](Figura1_Lu.png){#fig-Figura1 width="70%" fig-align="center" fig.cap="center"} 
+![Árvore Hierárquica do exemplo 1. Fonte: Autora, 2023.](Figura1_Lu.png){#fig-Figura1 width="70%" fig-align="center" fig.cap="center"} 
 
 Como temos 3 critérios e 4 alternativas, devemos obter 4 matrizes paritárias sendo M1 - matriz $3\times3$ comparando os 3 critérios; M2 - matriz $4\times 4$ comparando as 4 alternativas sob a luz do critério 1; M3 - matriz $4\times 4$ comparando as 4 alternativas sob a luz do critério 2; M4 - matriz $4\times 4$ comparando as 4 alternativas sob a luz do critério 3.
 
@@ -333,7 +333,7 @@ AHPWR::formata_tabela(tabela, cores = "WHITE")
 
 ```
 
-As versões GRAY e WHITE podem ser conferidas nas figuras @fig-Tabela2 e @fig-Tabela3 respectivamente.
+As versões GRAY e WHITE podem ser conferidas em @fig-Tabela2 e @fig-Tabela3 respectivamente.
 
 ![Tabela Final com os pesos globais, versão GRAY. Fonte: Autora, 2023.](Tabela2.png){#fig-Tabela2 width="60%" fig-align="center" fig.cap="center"}
 
