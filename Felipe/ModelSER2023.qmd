@@ -48,16 +48,11 @@ O texto integral do CAPÍTULO deve possuir no **MÍNIMO 10 páginas**, com Títu
 
 No momento da submissão, os nomes dos autores (MÁXIMO DE 2 AUTORES), seus e-mails e as instituições de origem devem ser incluídos nos locais específicos deste modelo.
 
-```{=html}
-<!--
-* Para fins de comparação, a exigência mínima de 10 páginas, deve ser comparada  com a seguinte formatação: Tamanho do papel A4 (21 cm x 29,7 cm), Fonte Arial; Tamanho da fonte 11; Todas as Margens (esquerda, superior, direita e inferior) com 2,5 cm; e Espaçamento entre linhas de 1,5 cm.
--->
-```
 Observações importantes:
 
 -   Todas as referências, figuras e tabelas devem estar corretamente citadas no texto.
 
--   Todas as Figuras e tabelas devem ser fornecidas em formato *.png* em resolução adequada.
+-   Todas as figuras e tabelas devem ser fornecidas em formato *.png* em resolução adequada.
 
     <div>
 
@@ -91,6 +86,9 @@ Nesta seção deverão ser especificados os procedimentos, o contexto e a aplica
 Deverá apresentar uma síntese dos resultados encontrados, podendo incluir tabela e/ou figura. Nesta seção devem ser incluídos comentários sobre os resultados e comparação dos achados do estudo com os de outras publicações.
 
 As tabelas e figuras (Entende-se por figuras: gráficos, mapas, fotografias, etc.) devem ser numeradas sequencialmente em algarismos arábicos. Cada tabela e figura, além da numeração, deve possuir um título autoexplicativo apropriado, colocado centralizado, acima da tabela e abaixo da figura. Tanto a tabela quanto a figura deverão ter a especificação da **FONTE**, posicionada na parte inferior, conforme ilustrado neste template.
+
+
+## Figuras 
 
 Figuras devem ser centralizadas, conforme ilustrado na @fig-Figura1. Toda figura deve apresentar os elementos mínimos conforme apresentado neste modelo. A @fig-Figura1 ilustra a formatação requerida.
 
@@ -140,7 +138,43 @@ ggplot(mpg, aes(x = hwy, y = cty, color = cyl)) +
 
 Neste caso, o código não é avaliado para gerar resultados.
 
-# Exemplos de arquivos .bib {#sec-exemplo}
+## Tabelas
+
+Aqui estão algumas orientações para inserção de tabelas. Sugerimos utilizar pacotes disponíveis no CRAN para formatação das tabelas-prefira formatações simples. Sugerimos o pacote *gt* para geração das tabelas devido possibilidade de inserir os elementos essenciais. A @tbl-tab01 é um exemplo de tabela de dados com *caption* e fonte.
+
+```{r}
+#| label: tbl-tab01
+#| tbl-cap: Tabela de Dados
+#| echo: false
+library("gt")
+# Create a display table based on `iris`
+iris_tbl <- gt(head(iris)) %>%
+  tab_spanner_delim(delim = ".") %>%
+  cols_move_to_start(columns = Species) %>%
+  fmt_number(
+    columns = c(Sepal.Length, Sepal.Width, Petal.Length, Petal.Width),
+    decimals = 1
+  ) %>%
+  #tab_header(
+  #  title = md("Título, se necessário"),
+  #  subtitle = md("[subtítulo, se necessário]")
+  #) %>%
+  #tab_header(
+  #  title = md("Table 1: Example table")
+  #) %>%
+  tab_source_note(
+    source_note = md("Fonte: NOME (ANO).")
+  )
+
+iris_tbl
+
+
+```
+
+
+
+
+## Exemplos de arquivos .bib {#sec-exemplo}
 
 Os arquivos *.bib* devem estar preenchidos com os elementos disponíveis de acordo com a normatização ABNT vigente. Exemplos de entradas *.bib* podem ser encontradas no arquivo *References.bib*.
 

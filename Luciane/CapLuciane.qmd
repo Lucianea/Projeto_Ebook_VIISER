@@ -22,7 +22,7 @@ editor: visual
 
 # Introdução
 
-O método AHP (*Analytic Hierarchy Process*) é uma técnica de apoio à decisão multicritério que permite comparar alternativas com base em critérios qualitativos e quantitativos. O método foi proposto por Thomas Saaty na década de 1970 e consiste em decompor um problema complexo em uma hierarquia de elementos, atribuir pesos aos critérios e às alternativas por meio de comparações pareadas e calcular os escores finais das alternativas. O método AHP também permite verificar a consistência das comparações e realizar análises de sensibilidade, [@saaty1980].
+O método AHP (*Analytic Hierarchy Process*) é uma técnica de apoio à decisão multicritério que permite comparar alternativas com base em critérios qualitativos e quantitativos. O método foi proposto por Thomas Saaty na década de 1970 e consiste em decompor um problema complexo em uma hierarquia de elementos, atribuir pesos aos critérios e às alternativas por meio de comparações pareadas e calcular os escores finais das alternativas. O método AHP também permite verificar a consistência das comparações e realizar análises de sensibilidade, [@saaty1980], [@saaty2012].
 
 Para facilitar a aplicação do método AHP, foi desenvolvido na linguagem R um pacote denominado AHPWR (Analytic Hierarchy Process with R) proposto por [@AlcoforadoSousaLongo2022], que oferece funções para construir a hierarquia do problema, realizar as comparações pareadas, calcular os pesos e os escores das alternativas, verificar a consistência das comparações e gerar gráficos, auxiliando a produção de relatórios. As funções deste pacote tiveram início durante o projeto de iniciação científica da UFF (Universidade Federal Fluminense) em 2018 e posteriormente foram adequadas e submetidas ao CRAN (Comprehensive R Archive Network) em 2022. O pacote AHPWR é uma ferramenta útil para pesquisadores, estudantes e profissionais que desejam utilizar o método AHP em seus projetos de decisão.
 
@@ -78,19 +78,19 @@ As vantagens do método AHP permitem:
 
 -   Realizar análises de sensibilidade para testar a robustez dos resultados.
 
-As limitações do método AHP são:
+As limitações do método AHP estão ligadas as seguintes requisições:
 
--   Requer um número elevado de comparações pareadas quando o número de elementos da hierarquia é grande, o que pode gerar fadiga ou erro nos julgamentos;
+-   Um número elevado de comparações pareadas quando o número de elementos da hierarquia é grande, o que pode gerar fadiga ou erro nos julgamentos;
 
--   Possuir um conhecimento prévio dos critérios e das alternativas, o que pode limitar a criatividade ou a inovação na tomada de decisão;
+-   Um conhecimento prévio dos critérios e das alternativas, o que pode limitar a criatividade ou a inovação na tomada de decisão;
 
--   Obter um software específico para realizar os cálculos e as análises, o que pode dificultar o acesso ou a compreensão dos usuários.
+-   Um software específico para realizar os cálculos e as análises, o que pode dificultar o acesso ou a compreensão dos usuários.
 
 Resumidamente, podemos dizer que a estrutura hierárquica do problema é composta de três níveis, conforme @fig-Figura0:
 
 -   Nível 1: Objetivo (*goal*) a ser atingido.
 
--   Nível 2: Critérios (*criteria*) a serem considerados.
+-   Nível 2: Critérios (*criteria*) a serem considerados. Cada critério pode ser subdividido em subcritérios, que representam aspectos mais específicos ou detalhados do critério.
 
 -   Nível 3: Alternativas (*choices*) a serem ponderadas.
 
@@ -110,7 +110,10 @@ ggplot2::ggsave("Figura1_Lu.png",plot = p,width = 5, height =5, dpi = 300,units=
 
 ![Estrutura Hierárquica de um problema. Fonte: Autora, 2023.](Figura0_Lu.png){#fig-Figura0 width="80%" fig-align="center" fig.cap="center"}
 
-```{mermaid}
+
+```{=html}
+<!--
+%%código mermaid para produzir diagrama
 %%para criar o diagrama use https://mermaid.live/
 %% eval: false
 %% echo: false
@@ -126,7 +129,11 @@ ggplot2::ggsave("Figura1_Lu.png",plot = p,width = 5, height =5, dpi = 300,units=
 %%    C -->|1| D[Alternativa 1]
 %%    C -->|...| E[Alternativa 2]
 %%    C -->|n| F[Alternativa n]
+
+-->
 ```
+
+A possibilidade de considerar subcritérios na formulação do problema, permite uma maior refinamento e precisão na análise dos critérios, mas também aumenta a complexidade e o número de comparações necessárias para o método AHP. Os subcritérios podem ter pesos diferentes dentro do critério, e devem ser comparados entre si em relação às alternativas. O pacote AHPWR lida com problemas desse tipo, maiores detalhes devem ser vistos na documentação do pacote, consultando o tutorial elaborado por [@AlcoforadoLongo2022].
 
 Após a estruturação do problema, o próximo passo é obter os julgamentos que podem ser feitos por um especialista ou um grupo de especialistas.
 
@@ -136,29 +143,31 @@ Será necessário obter $m+1$ matrizes paritárias, sendo $m$ o número de crit�
 
 A primeira matriz será $m\times m$ comparando os $m$ critérios par a par; as demais matrizes serão $n\times n$ comparando as $n$ alternativas à luz de cada critério.
 
-Para realizar as comparações, @saaty1980 propôs uma escala, conhecida como escala fundamental de Saaty, conforme @fig-Figura2.
+Para realizar as comparações, [@saaty1980] propôs uma escala, conhecida como escala fundamental de Saaty, conforme @fig-Figura2.
 
-![Escala Fundamental de Saaty Fonte: Adaptado de @saaty1980](Figura2_Lu.png){#fig-Figura2 width="70%" fig-align="center" fig.cap="center"}
+![Escala Fundamental de Saaty. Fonte: Adaptado de @saaty1980.](Figura2_Lu.png){#fig-Figura2 width="70%" fig-align="center" fig.cap="center"}
 
-Outra possibilidade para construir os julgamentos é utilizando a proposta de [@godoy2014] que consiste no método do julgamento holístico que visa dar auxílio à construção da matriz de julgamentos paritários. O método propõe uma regra de atribuição de pesos aos elementos da hierarquia, usando uma escala de 0 a 10 (ou de 0 a 100), de forma que todos os itens a serem avaliados sejam colocados lado a lado, cabendo ao julgador atribuir um peso relativo de forma a ser possível ordená-los, do menos importante ao mais importante. Após atribuído os pesos $w_1, ..., w_k$ aos $k$ itens a serem comparados, são aplicados fórmulas para a obtenção da matriz paritária, fazendo $a_{ij} = wi – wj +1$ se $wi \ge wj$ (isto é, se o item $i$ tem importância maior ou igual ao item $j$); caso contrário $aij = 1/(wj – wi +1)$ se $wi < wj$.
+Outra possibilidade para construir os julgamentos é utilizando a proposta de [@godoy2014] que consiste no método do julgamento holístico que visa dar auxílio à construção da matriz de julgamentos paritários. O método propõe uma regra de atribuição de pesos aos elementos da hierarquia, usando uma escala de 0 a 10 (ou de 0 a 100), de forma que todos os itens a serem avaliados sejam colocados lado a lado, cabendo ao julgador atribuir um peso relativo de forma a ser possível ordená-los, do menos importante ao mais importante. Após atribuído os pesos $w_1, ..., w_k$ aos $k$ itens a serem comparados, são aplicados fórmulas para a obtenção da matriz paritária, fazendo:
+$$a_{ij} = w_i – w_j +1$$,  se $w_i \ge w_j$ (isto é, se o item $i$ tem importância maior ou igual ao item $j$); caso contrário
+$$a_{ij} = \frac{1}{(w_j – w_i +1)}$$, se $w_i < w_j$.
 
 Todas as matrizes paritárias devem ser verificadas quanto a sua consistência, isto é, deve ser realizado o teste de consistência.
 
 O teste de consistência de Saaty é uma forma de verificar se os julgamentos paritários feitos pelo decisor no método AHP são coerentes e confiáveis. O teste consiste em calcular a razão de consistência (RC) dos julgamentos, que é uma medida que compara o índice de consistência (IC) dos julgamentos com o índice aleatório (IR) esperado para uma matriz de julgamentos aleatórios. A fórmula para calcular a RC é:
 
-$RC=\frac{IR}{IC}$
+$$RC=\frac{IR}{IC}$$
 
 Onde:
 
 IC é o índice de consistência, que é dado por
 
-$IC=\frac{\lambda_{max}−n}{n-1}$
+$$IC=\frac{\lambda_{max}−n}{n-1}$$
 
 $\lambda_{max}$ é o maior autovalor da matriz de julgamentos;
 
 $n$ é a ordem da matriz de julgamentos;
 
-$IR$ é o índice aleatório, que é obtido a partir de uma tabela fornecida por Saaty.
+$IR$ é o índice aleatório, que é obtido a partir de uma tabela fornecida por Saaty, consultar [@saaty1980].
 
 O teste de consistência de Saaty considera que os julgamentos são consistentes e aceitáveis se a $RC$ for menor ou igual a 0,1. Caso contrário, os julgamentos devem ser revisados pelo decisor para eliminar as inconsistências.
 
@@ -181,21 +190,23 @@ Alternativas: A1 - Estatística; A2 - Engenharia Civil; A3 - Computação; A4 - 
 A árvore hieráquica é obtida rapidamente utilizando-se o código a seguir, cujo resultado pode ser visto na @fig-Figura1:
 
 ```{r}
-#| label: Figura1
 #| echo: true
+#| eval: false
 #| warning: FALSE
 #| message: FALSE
 AHPWR::flow_chart(names=NULL, c=3, a=4)
 ```
 
-![Árvore Hierárquica do exemplo 1](Figura1_Lu.png){#fig-Figura1 width="100%" fig-align="center" fig.cap="center"}
+![Árvore Hierárquica do exemplo 1. Fonte: Autora, 2023.](Figura1_Lu.png){#fig-Figura1 width="70%" fig-align="center" fig.cap="center"} 
+
 Como temos 3 critérios e 4 alternativas, devemos obter 4 matrizes paritárias sendo M1 - matriz $3\times3$ comparando os 3 critérios; M2 - matriz $4\times 4$ comparando as 4 alternativas sob a luz do critério 1; M3 - matriz $4\times 4$ comparando as 4 alternativas sob a luz do critério 2; M4 - matriz $4\times 4$ comparando as 4 alternativas sob a luz do critério 3.
 
-A função **matriz_julgamento** produz perguntas no console do R, conduzindo o julgador a realizar todas as comparações necessárias no modo tradicional do julgamento proposto por Saaty. Cada pergunta deve ser respondida a nível de console, ao final é gerada a matriz e o resultado do teste de consistência, conforme @fig-Figura3.
+A função **matriz_julgamento()** produz perguntas no console do R, conduzindo o julgador a realizar todas as comparações necessárias no modo tradicional do julgamento proposto por Saaty. Cada pergunta deve ser respondida a nível de console, ao final é gerada a matriz e o resultado do teste de consistência, conforme @fig-Figura3.
 
 ```{r}
 #| echo: true
 #| eval: false
+#| include: true
 AHPWR::matriz_julgamento(n_comp = 3, n_matrix = 1)
 ```
 
@@ -216,9 +227,9 @@ AHPWR::CR(m1)
 
 ```
 
-Agora deve fixar cada critério do nível 2 e realizar a comparação das alternativas do nível 3.
+Para cada critério do nível 2 o julgador deve realizar a comparação das alternativas do nível 3.
 
-Considerando o critério 1, a afinidade na escolha da profissão, o julgador deve atribuir os pesos para cada curso. supondo que foi atribuído $w_1 = 4, w_2 = 5, w_3=3 \space e \space w_4=2$, ou seja, a alternativa 2 foi julgado mais importante, depois a alternativao 1 um pouco menos importante seguida da alternativa 3 e a menos importante foi a alternativa 4. Esses julgamentos possibilitam a criação da matriz $m_2$:
+Considerando o **critério 1**, a afinidade na escolha da profissão, o julgador deve atribuir os pesos para cada curso. supondo que foi atribuído $w_1 = 4, w_2 = 5, w_3=3 \space e \space w_4=2$, ou seja, a alternativa 2 foi julgado mais importante, depois a alternativao 1 um pouco menos importante seguida da alternativa 3 e a menos importante foi a alternativa 4. Esses julgamentos possibilitam a criação da matriz $m_2$:
 
 ```{r}
 #| echo: true
@@ -230,7 +241,7 @@ m2
 AHPWR::CR(m2)
 ```
 
-Considerando o critério 2, o mercado de trabalho na escolha da profissão, o julgador deve atribuir os pesos para cada curso. supondo que foi atribuído $w_1 = 2, w_2 = 4, w_3=3 \space e \space w_4=7$, ou seja, a alternativa 4 foi julgada mais importante, depois a alternativa 2 menos importante seguida da alternativa 3 e a menos importante foi a alternativa 1. Esses julgamentos possibilitam a criação da matriz $m_3$:
+Considerando o **critério 2**, o mercado de trabalho na escolha da profissão, o julgador deve atribuir os pesos para cada curso. supondo que foi atribuído $w_1 = 2, w_2 = 4, w_3=3 \space e \space w_4=7$, ou seja, a alternativa 4 foi julgada mais importante, depois a alternativa 2 menos importante seguida da alternativa 3 e a menos importante foi a alternativa 1. Esses julgamentos possibilitam a criação da matriz $m_3$:
 
 ```{r}
 #| echo: true
@@ -242,7 +253,7 @@ m3
 AHPWR::CR(m3)
 ```
 
-Considerando o critério 3, a relação candidato-vaga na escolha da profissão, o julgador deve atribuir os pesos para cada curso. supondo que foi atribuído $w_1 = 4.9, w_2 = 5, w_3=3.3 \space e \space w_4=1$, ou seja, a alternativa 2 foi julgada mais importante, depois a alternativa 1 um pouco menos importante seguida da alternativa 3 e a menos importante foi a alternativa 4. Esses julgamentos possibilitam a criação da matriz $m_4$:
+Considerando o **critério 3**, a relação candidato-vaga na escolha da profissão, o julgador deve atribuir os pesos para cada curso. supondo que foi atribuído $w_1 = 4.9, w_2 = 5, w_3=3.3 \space e \space w_4=1$, ou seja, a alternativa 2 foi julgada mais importante, depois a alternativa 1 um pouco menos importante seguida da alternativa 3 e a menos importante foi a alternativa 4. Esses julgamentos possibilitam a criação da matriz $m_4$:
 
 ```{r}
 #| echo: true
@@ -253,5 +264,260 @@ m4=AHPWR::matrix_ahp(x,y)
 m4
 AHPWR::CR(m4)
 ```
+
+Após o estabelecimento dos julgamentos, devemos organizar todas as matrizes numa base de dados.
+
+O pacote AHPWR oferece duas opções, podemos organizar todas as matrizes em uma lista ou podemos organizar todas as matrizes em um arquivo de planilhas de tal forma que cada planilha corresponda a cada matriz.
+
+```{r}
+#| echo: true
+#| eval: true
+#Organizando em lista
+base = list(m1, m2, m3, m3)
+base
+```
+
+```{r}
+#| echo: true
+#| eval: false
+#Organizando em arquivo denominado Exemplo_1.xlsx
+file1 = AHPWR::xlsx_ahp(m1, file = "Exemplo_1.xlsx", sheet = "M1", append = FALSE)
+file2 = AHPWR::xlsx_ahp(m2, file = "Exemplo_1.xlsx", sheet = "M2", append = TRUE)
+file3 = AHPWR::xlsx_ahp(m3, file = "Exemplo_1.xlsx", sheet = "M3", append = TRUE)
+file4 = AHPWR::xlsx_ahp(m4, file = "Exemplo_1.xlsx", sheet = "M4", append = TRUE)
+```
+
+Ao optar por armazenar as matrizes no arquivo Exemplo_1.xlsx, o mesmo deve ter sido criado na pasta de trabalho corrente, após rodar os comandos acima, @fig-Figura4.
+
+![Arquivo contendo as matrizes de julgamento em planilhas. Fonte: Autora, 2023.](Figura4_Lu.png){#fig-Figura4 width="100%" fig-align="center" fig.cap="center"} 
+
+Para obter o resultado final do método, isto é, os pesos globais das alternativas, utilizamos a função **ahp_geral()**:
+
+```{r}
+#| echo: true
+#| eval: true
+#Nomes das alternativas no vetor x
+x
+#aplicando o método na base de dados
+AHPWR::ahp_geral(base, nomes_alternativas = x) 
+```
+
+Podemos formatar a tabela de resultados, através do comando **formata_tabela()**, que possui três versões, sendo a versão padrão exibida na @fig-Tabela1:
+
+```{r}
+#| include: true
+#| eval: false
+tabela = AHPWR::ahp_geral(base, nomes_alternativas = x)
+AHPWR::formata_tabela(tabela)
+```
+
+```{=html}
+<!--
+Não consegui incluir uma figura como tabela.
+\begin{table}[htb]
+\caption{Testando Tabela}
+\begin{tabular}{c}
+\includegraphics[scale=100,angle=90]{Tabela1.png}\\
+\end{tabular}
+\end{table}
+-->
+```
+
+![Tabela Final com os pesos globais, versão padrão. Fonte: Autora, 2023.](Tabela1.png){#fig-Tabela1 width="60%" fig-align="center" fig.cap="center"}
+
+```{r}
+#| echo: true
+#| eval: false
+AHPWR::formata_tabela(tabela, cores = "GRAY")
+AHPWR::formata_tabela(tabela, cores = "WHITE")
+
+```
+
+As versões GRAY e WHITE podem ser conferidas em @fig-Tabela2 e @fig-Tabela3 respectivamente.
+
+![Tabela Final com os pesos globais, versão GRAY. Fonte: Autora, 2023.](Tabela2.png){#fig-Tabela2 width="60%" fig-align="center" fig.cap="center"}
+
+
+![Tabela Final com os pesos globais, versão WHITE. Fonte: Autora, 2023.](Tabela3.png){#fig-Tabela3 width="60%" fig-align="center" fig.cap="center"}
+
+### Exemplo 2
+
+Objetivo: Escolher o método construtivo de uma ponte
+
+Critérios para a tomada de decisão: C1 - Custo de Construção; C2 - Desenho; C3 - Custo de Manutenção; 
+C4 - Resistência ao Vento; 
+C5 - Resistência ao Tráfego; C6 - Vida Útil.
+
+Alternativas: 
+A1 - Ponte Pensil; A2 - Ponte Estaiada; A3 - Ponte Treliçada; A4 - Ponte em Arco.
+
+A árvore hieráquica é obtida rapidamente utilizando-se o código a seguir, cujo resultado pode ser visto na @fig-Figura1_ex2:
+
+```{r}
+#| echo: true
+#| eval: false
+#| warning: FALSE
+#| message: FALSE
+AHPWR::flow_chart(names=NULL, c=6, a=4)
+```
+
+![Árvore Hierárquica do exemplo 2. Fonte: Autora, 2023.](Figura1-ex2_Lu.png){#fig-Figura1_ex2 width="70%" fig-align="center" fig.cap="center"} 
+
+Como temos 6 critérios e 4 alternativas, devemos obter 7 matrizes paritárias sendo M1 - matriz $6\times6$ comparando os 6 critérios; M2 - matriz $4\times 4$ comparando as 4 alternativas sob a luz do critério 1; M3 - matriz $4\times 4$ comparando as 4 alternativas sob a luz do critério 2; M4 - matriz $4\times 4$ comparando as 4 alternativas sob a luz do critério 3; M5 - matriz $4\times 4$ comparando as 4 alternativas sob a luz do critério 4; M6 - matriz $4\times 4$ comparando as 4 alternativas sob a luz do critério 5; M7 - matriz $4\times 4$ comparando as 4 alternativas sob a luz do critério 6.
+
+
+Vamos aplicar o julgamento holístico proposto por [@godoy2014]. Agora, o julgador deve atribuir os pesos relativos da importância dos critérios. Supondo que foi atribuído $w_1 = 7, w_2 = 9, w_3 = 2.5, w_4 = 10, w_5 = 9.5 \space e \space w_6=2$, ou seja, o critério 4 foi julgado o mais importante, depois o critério 5 e assim sucessivamente até o menos importante que foi o critério 6.
+
+```{r}
+#| echo: true
+#| eval: true
+x=paste0("C",1:6) #nomes dos critérios C1, C2, ..., C6
+y=c(7, 9, 2.5, 10, 9.5, 2) #julgamento holístico dos critérios
+m1=AHPWR::matrix_ahp(x,y) #matriz paritária de julgamentos dos critérios
+m1
+AHPWR::CR(m1)
+
+```
+
+Para cada critério do nível 2 o julgador deve realizar a comparação das alternativas do nível 3.
+
+Considerando o **critério 1**, o custo de construção da ponte, o julgador deve atribuir os pesos para cada tipo. Supondo que foi atribuído $w_1 = 4, w_2 = 5, w_3=4.5 \space e \space w_4=4.9$, ou seja, a alternativa 2 foi julgado mais importante, ou seja, seu custo é o mais importante a ser considerado na tomada de decisão, é o que deverá pesar mais nesse quesito. Esses julgamentos possibilitam a criação da matriz $m_2$:
+
+```{r}
+#| echo: true
+#| eval: true
+x=paste0("A",1:4) #nomes das alternativas A1, A2, A3, A4
+y=c(4, 5, 4.5, 4.9) #julgamento holístico das alternativas para o critério 1
+m2=AHPWR::matrix_ahp(x,y)
+m2
+AHPWR::CR(m2)
+```
+
+Considerando o **critério 2**, o desenho da ponte, o julgador deve atribuir os pesos para cada alternativa. Supondo que foi atribuído $w_1 = 2, w_2 = 4, w_3 = 3 \space e \space w_4 = 5$, ou seja, a alternativa 4 foi julgada mais importante, depois a alternativa 2 menos importante seguida da alternativa 3 e a menos importante foi a alternativa 1. Esses julgamentos possibilitam a criação da matriz $m_3$:
+
+```{r}
+#| echo: true
+#| eval: true
+x=paste0("A",1:4) #nomes das alternativas A1, A2, A3, A4
+y=c(2, 4, 3, 5) #julgamento holístico das alternativas para o critério 2
+m3=AHPWR::matrix_ahp(x,y)
+m3
+AHPWR::CR(m3)
+```
+
+Considerando o **critério 3**, custo de manutenção, o julgador deve atribuir os pesos para cada alternativa. Supondo que foi atribuído $w_1 = 3, w_2 = 3.1, w_3=3.3 \space e \space w_4=3.5$, esses julgamentos possibilitam a criação da matriz $m_4$:
+
+```{r}
+#| echo: true
+#| eval: true
+x=paste0("A",1:4) #nomes das alternativas A1, A2, A3, A4
+y=c(3, 3.1, 3.3, 3.4) #julgamento holístico das alternativas para o critério 3
+m4=AHPWR::matrix_ahp(x,y)
+m4
+AHPWR::CR(m4)
+```
+
+Considerando o **critério 4**, resistência ao vento, o julgador deve atribuir os pesos para cada alternativa. Supondo que foi atribuído $w_1 = 2, w_2 = 5, w_3=4 \space e \space w_4=1$, esses julgamentos possibilitam a criação da matriz $m_5$:
+
+```{r}
+#| echo: true
+#| eval: true
+x=paste0("A",1:4) #nomes das alternativas A1, A2, A3, A4
+y=c(2, 5, 4, 1) #julgamento holístico das alternativas para o critério 3
+m5=AHPWR::matrix_ahp(x,y)
+m5
+AHPWR::CR(m5)
+```
+
+Considerando o **critério 5**, resistência ao tráfego, o julgador deve atribuir os pesos para cada alternativa. Supondo que foi atribuído $w_1 = 3, w_2 = 3.5, w_3=6 \space e \space w_4=5.5$, esses julgamentos possibilitam a criação da matriz $m_6$:
+
+```{r}
+#| echo: true
+#| eval: true
+x=paste0("A",1:4) #nomes das alternativas A1, A2, A3, A4
+y=c(3, 3.5, 6, 5.5) #julgamento holístico das alternativas para o critério 3
+m6=AHPWR::matrix_ahp(x,y)
+m6
+AHPWR::CR(m6)
+```
+
+Considerando o **critério 6**, a vida útil, o julgador deve atribuir os pesos para cada alternativa. Supondo que foi atribuído $w_1 = 3, w_2 = 4, w_3=6 \space e \space w_4=8$, esses julgamentos possibilitam a criação da matriz $m_7$:
+
+```{r}
+#| echo: true
+#| eval: true
+x=paste0("A",1:4) #nomes das alternativas A1, A2, A3, A4
+y=c(3, 4, 6, 8) #julgamento holístico das alternativas para o critério 3
+m7=AHPWR::matrix_ahp(x,y)
+m7
+AHPWR::CR(m7)
+```
+
+Após o estabelecimento dos julgamentos, devemos organizar todas as matrizes numa base de dados.
+
+O pacote AHPWR oferece duas opções, podemos organizar todas as matrizes em uma lista ou podemos organizar todas as matrizes em um arquivo de planilhas de tal forma que cada planilha corresponda a cada matriz.
+
+```{r}
+#| echo: true
+#| eval: true
+#Organizando em lista
+base = list(m1, m2, m3, m4, m5, m6, m7)
+base
+```
+
+```{r}
+#| echo: true
+#| eval: false
+#Organizando em arquivo denominado Exemplo_2.xlsx
+file1 = AHPWR::xlsx_ahp(m1, file = "Exemplo_2.xlsx", sheet = "M1", append = FALSE)
+file2 = AHPWR::xlsx_ahp(m2, file = "Exemplo_2.xlsx", sheet = "M2", append = TRUE)
+file3 = AHPWR::xlsx_ahp(m3, file = "Exemplo_2.xlsx", sheet = "M3", append = TRUE)
+file4 = AHPWR::xlsx_ahp(m4, file = "Exemplo_2.xlsx", sheet = "M4", append = TRUE)
+file5 = AHPWR::xlsx_ahp(m5, file = "Exemplo_2.xlsx", sheet = "M5", append = TRUE)
+file6 = AHPWR::xlsx_ahp(m6, file = "Exemplo_2.xlsx", sheet = "M6", append = TRUE)
+file7 = AHPWR::xlsx_ahp(m7, file = "Exemplo_2.xlsx", sheet = "M7", append = TRUE)
+```
+
+Ao optar por armazenar as matrizes no arquivo Exemplo_2.xlsx, o mesmo deve ter sido criado na pasta de trabalho corrente, após rodar os comandos acima.
+
+
+Para obter o resultado final do método, isto é, os pesos globais das alternativas, utilizamos a função **ahp_geral()**:
+
+```{r}
+#| echo: true
+#| eval: true
+#Nomes das alternativas no vetor x
+x
+#aplicando o método na base de dados
+AHPWR::ahp_geral(base, nomes_alternativas = x) 
+```
+
+A tabela formatada pode ser vista na @fig-Tabela1_ex2
+
+![Tabela Final com os pesos globais. Fonte: Autora, 2023.](Tabela1-ex2.png){#fig-Tabela1_ex2 width="60%" fig-align="center" fig.cap="center"}
+
+# Resultados e Discussão
+
+Os exemplos 1 e 2 descrevem o procedimento para aplicar o método AHP, desde sua estrutura hierárquica conforme @fig-Figura1 e @fig-Figura1_ex2, todo o procedimento de elaboração das matrizes de julgamento com base nos julgamentos de especialista, até a obtenção do resultado final que é a tabela com os pesos globais de cada alternativa, conforme @fig-Tabela1 e @fig-Tabela1_ex2.
+
+As tabelas com o peso global facilitam a escolha do tomador de decisão, pois mostram a ordem de preferência das alternativas em relação ao objetivo geral. No exemplo 1, a alternativa A2-Engenharia Civil foi a mais prioritária, com um peso de 40.29%. O critério C1-Afinidade foi o mais relevante para essa decisão, com um peso de 75.82%. As razões de consistência dos julgamentos (CR) foram todas inferiores a 10%, indicando uma boa coerência nas comparações.
+
+No exemplo 2, a alternativa A2-Ponte Estaiada foi a mais prioritária, com um peso de 31.95%. O critério C4-Resistência ao vento foi o mais relevante para essa decisão, com um peso de 34.37%. As razões de consistência dos julgamentos (CR) foram todas inferiores a 10%, indicando uma boa coerência nas comparações.
+
+Note que a soma dos pesos tanto dos critérios como das alternativas resultam em 100%. Os valores intermediários dos critérios versus alternativas mostram a contribuição de cada item na composição final do peso global.
+
+
+Este método auxilia o tomador de decisão a fazer uma escolha com base no peso global das alternativas ou mesmo obter um ranking de importância dessas alternativas.
+
+# Considerações Finais
+
+Neste capítulo, apresentamos o método AHP como uma técnica de apoio à decisão que permite comparar e priorizar alternativas com base em critérios múltiplos e subjetivos. O método consiste em construir uma hierarquia de objetivos, critérios e alternativas, e atribuir pesos (ou importâncias) a cada elemento da hierarquia por meio de comparações pareadas. As tabelas com os pesos globais do método AHP são o resultado da agregação dos pesos locais de cada nível da hierarquia, ponderados pelos pesos dos níveis superiores. Essas tabelas permitem visualizar a ordem de preferência das alternativas em relação ao objetivo geral, bem como a consistência das comparações realizadas. Quanto maior o peso global de uma alternativa, maior é a sua prioridade na decisão. Quanto menor o índice de consistência, maior é a coerência das comparações.
+
+O método AHP tem como vantagens a sua simplicidade, flexibilidade e consistência, mas também possui algumas limitações, como a necessidade de um grande número de comparações, a sensibilidade aos pesos dos critérios e a dificuldade de lidar com incertezas. O método AHP pode ser aplicado em diversas áreas do conhecimento e em diferentes tipos de problemas de decisão, como por exemplo: escolha da melhor localização de uma usina hidrelétrica, seleção do melhor fornecedor de um produto ou serviço, avaliação do desempenho de funcionários ou organizações, definição da melhor estratégia de marketing, alocação de recursos militares em um cenário de conflito, intervenção em uma situação de crise, vulnerabilidade de um sistema de defesa, entre outros. O método AHP pode ajudar os líderes a tomar decisões racionais e consistentes em situações complexas e incertas.
+
+Foram explicados os passos para a aplicação do método AHP, desde a definição do problema até a obtenção dos resultados, destacando a importância de uma boa estruturação da hierarquia, da escolha de uma escala de comparação adequada e da verificação da consistência das comparações. Foi demonstrado o uso do pacote AHPWR para implementar o método AHP na linguagem R, mostrando as funções disponíveis e os exemplos de código. O pacote AHPWR facilita a realização das comparações pareadas, o cálculo dos pesos locais e globais, a verificação da consistência e a visualização dos resultados. Foi ilustrada a aplicação do método AHP e do pacote AHPWR em dois casos práticos de seleção de alternativas com base em critérios múltiplos, um envolvendo a escolha da profissão e outro a escolha do melhor método de construção de uma ponte.
+
+Espera-se que este capítulo possa contribuir para a divulgação e o uso do método AHP e do pacote AHPWR na comunidade acadêmica e profissional, bem como estimular novas pesquisas e aplicações na área de apoio à decisão.
+
 
 # Referências {#sec-referências}
