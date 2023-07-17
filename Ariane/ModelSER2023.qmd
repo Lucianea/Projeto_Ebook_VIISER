@@ -87,8 +87,7 @@ Deverá apresentar uma síntese dos resultados encontrados, podendo incluir tabe
 
 As tabelas e figuras (Entende-se por figuras: gráficos, mapas, fotografias, etc.) devem ser numeradas sequencialmente em algarismos arábicos. Cada tabela e figura, além da numeração, deve possuir um título autoexplicativo apropriado, colocado centralizado, acima da tabela e abaixo da figura. Tanto a tabela quanto a figura deverão ter a especificação da **FONTE**, posicionada na parte inferior, conforme ilustrado neste template.
 
-
-## Figuras 
+## Figuras
 
 Figuras devem ser centralizadas, conforme ilustrado na @fig-Figura1. Toda figura deve apresentar os elementos mínimos conforme apresentado neste modelo. A @fig-Figura1 ilustra a formatação requerida.
 
@@ -170,9 +169,6 @@ iris_tbl
 
 
 ```
-
-
-
 
 ## Exemplos de arquivos .bib {#sec-exemplo}
 
