@@ -1,8 +1,8 @@
 ---
-title: TÍTULO COMPLETO, EM LETRAS MAIÚSCULAS
+title: INTELIGÊNCIA ARTIFICIAL APLICADA À ENGENHARIA
 subtitle: subtítulo caso exista. 
 titlerunning: Short form of title (if too long for head)
-authorrunning:
+authorrunning:Marco Aurélio Chaves Ferro
   Short form of author list if too long for running head
 lang: pt
 style: justify
@@ -11,16 +11,16 @@ thanks: |
   Agradecimentos ou outras notas sobre o capítulo devem ser colocadas aqui. Agradecimentos gerais 
   devem ser colocados no fim do capítulo. 
 authors:
-  - name: Nome Completo do 1º Autor
-    address: Department of YYY, University of XXX
-    email: abc@def
+  - name: Marco Aurélio Chaves Ferro
+    address: Programa de Pós-Graduação em Engenharia Civil - Universidade Federal Fluminense
+    email: marcoferro@id.uff.br
   - name: Nome Completo do 2º Autor 
     address: Department of ZZZ, University of WWW
     email: djf@wef
 abstract: |
-  Coloque aqui o resumo contendo no máximo 1500 caracteres sem contar espaços, em um único parágrafo. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi dictum dui tincidunt, pellentesque eros ac, tincidunt tortor. Duis porttitor diam quam, a efficitur mi gravida ac. Duis auctor dui accumsan, tempus sem consectetur, consectetur magna. Integer ac augue sed odio aliquet scelerisque sollicitudin in justo. Integer viverra dictum libero, eu euismod nunc blandit eget. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Ut nulla neque, tempus eu varius vel, ultrices placerat nulla. Sed ut orci ut tellus vehicula molestie vel ultrices risus. Aenean vulputate ipsum sed dolor consectetur aliquam. Mauris luctus aliquam nibh, sit amet rhoncus nisi auctor sed. Nunc vel ipsum nec tellus aliquam facilisis iaculis vitae velit. Vestibulum sodales tortor lobortis varius rhoncus. Suspendisse aliquet magna sit amet urna interdum consectetur. Nulla et turpis vel augue lobortis elementum id vel diam. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Pellentesque consequat ut tellus id fermentum. Nullam eu aliquet ipsum, a lobortis dolor. In pulvinar, elit eu pellentesque vulputate, sem risus vulputate dui, congue bibendum lacus nisl ut nunc. Praesent velit sem, dictum vitae posuere nec, condimentum eget lacus. Suspendisse ante ante, ultricies in consequat vel, tincidunt a justo. Donec. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Ut nulla neque, tempus eu varius vel, ultrices placerat nulla. Sed ut orci ut tellus vehicula molestie vel ultrices risus. 
+  O presente trabalho apresenta as principais características e metodologias de Inteligência Artificial adotadas em Engenharia, com destaque para a Engenharia Civil. Sâo descritos os aspectos fundamentais de Aprendizado de Máquinas (Machine Learning) e Aprendizado Profundo (Deep Leaerning) e suas principais técnicas, com enfoque especial em Redes Neurais Artificiais (Artificial Neural Network). Alguns exemplos de aplicações são citados como Gêmeos Digitais, Computação Quântica, Metaverso e ChatGPT. O exemplo de aplicação mostra a predição da resistência do concreto á compressão, usando-se uma planilha com 1032 experimentos e uso de Redes Neurais Artificiais. A linguagem de computação R foi utilizada e os resultadsos foram plenamente satisfatórios. 
   
-  Palavras Chave: Máximo de 5 palavras chave separadas por ponto e vírgula (;).
+  Palavras Chave: Inteligência Artificial; Redes Neurais Artificiais; Linguagem R.
 bibliography: References.bib
 #output:
 #  rticles::springer_article
@@ -30,7 +30,11 @@ editor: visual
 
 # Introdução
 
-ATENÇÃO Este template ilustra e orienta os autores que deverão submeter o assunto de sua palestra apresentada no VII SER na forma de capítulo de livro.
+1.  Introdução
+Este trabalho apresenta os principais aspectos da Inteligência Artificial, com suas aplicações à Engenharia de maneira geralmas focadas na Engenharia Civil, considerando a sua multidisciplinaridade, quais sejam as disciplinas Arquitetura, Engenharia Mecânica, Engenharia Mecatrônica, Robótica, Computação, Engenharia de Sistemas, Meio Ambiente, dentre outros. 
+A simulação numérica é abordada em Engenharia desde o advento do computador e diversos métodos foram sendo criados por pesquisadores e cientistas ao longo do tempo, destacando-se, dentre outros, Diferenças Finitas, Elementos Finitos, Elementos de Contorno, Volumes Finitos, de acordo com Ferro (2002). 
+Há várias definições sobre o significado de Inteligência Artificial na literatura que trata do assunto, destacando-se o descrito no livro de Stuart e Norvig (2003) . Ela pode ser entendida como a Ciência que procura simular o comportamento humano (peopleware) com o uso de programas de computadores (softwares) e máquinas (hardwares),(ver figura 1).
+A simulação em Inteligência Artificial é realizada por diversas técnicas, cada uma utilizada sozinha ou em combinação com outras, de acordo com o seu objetivo, destacando-se: Redes Neurais Artificiais (RNA)/Artificial Neural Network (ANN), Aprendizado de Máquinas (AM)/Machine Learning (ML), Aprendizado Profundo (AP) /Deep Learning (DL), Algoritmos Genéticos (AG)/Genetic ATENÇÃO Este template ilustra e orienta os autores que deverão submeter o assunto de sua palestra apresentada no VII SER na forma de capítulo de livro. Após uma explicação sucinta do estágio atual da Inteligência Artificial, as suas disciplinas e seu comportamento multidisciplinar, serão apresentadas as técnicas utilizadas em um exemplo de aplicação na Engenharia Civil, que é uma Lar Inteligente, podendo ser uma casa ou um apartamento. Os resultados e conclusões encerram o presente trabalho, onde também serão descritas expectativas para o futuro da Inteligência Artificial aplicada à Engenharia Civil.
 
 Os autores devem redigir o CAPÍTULO utilizando este template, que está no formato adequado para a PRODUÇÃO DO EBOOK DE PALESTRAS DO VI SER -- Seminário Internacional de Estatística com R.
 
