@@ -16,25 +16,124 @@ authors:
     address: Programa de pós Graduação em Administração, Universidade Federal Fluminense
     email: alevy@id.uff.br
 abstract: |
-  Abstract a ser escritoAbstract a ser escritoAbstract a ser escritoAbstract a ser escritoAbstract a ser escritoAbstract a ser escritoAbstract a ser escritoAbstract a ser escritoAbstract a ser escritoAbstract a ser escritoAbstract a ser escritoAbstract a ser escritoAbstract a ser escritoAbstract a ser escritoAbstract a ser escritoAbstract a ser escritoAbstract a ser escritoAbstract a ser escritoAbstract a ser escritoAbstract a ser escritoAbstract a ser escritoAbstract a ser escritoAbstract a ser escritoAbstract a ser escritoAbstract a ser escritoAbstract a ser escritoAbstract a ser escritoAbstract a ser 
-  
-  Palavras Chave: Personal Knowledge Management, QUARTO, Research Methods
+        O conceito de gestão do conhecimento é amplamente reconhecido e há muito tempo aplicado em grandes organizações. Já a gestão do conhecimento pessoal (PKM) é um termo mais recente, ganhando destaque nas últimas décadas. O PKM busca transformar informações dispersas em conhecimento valioso, através de etapas como coleta, avaliação, ordenação, colaboração e apresentação. Diferentes enfoques, como o modelo Seek>>Sense>>Share, são empregados para dominar essa prática. O avanço nas pesquisas levou ao desenvolvimento de várias ferramentas e estruturas para simplificar esse processo. A adoção de software livre também cria um ambiente propício para a implantação das práticas de PKM, diferenciando-se da abordagem tradicional de gestão do conhecimento. Nesse contexto, o sistema QUARTO, um sistema de código aberto para publicações técnicas e científicas, é explorado como uma plataforma que favorece as atividades de PKM, utilizando a metodologia seek, sense, share.
+Palavras Chave: Personal Knowledge Management, QUARTO, Research Methods
 bibliography: References.bib
+csl: apa.csl
 #output:
 #  rticles::springer_article
-format: pdf
+format: 
+   pdf:
+    mermaid:
+      theme: neutral
 editor: visual
+engine: knitr
 ---
+
+\AddToHookNext{env/Highlighting/begin}{\scriptsize}
 
 # Introdução
 
-O framework seek, sense, share de [@theseek]
+O termo gestão do conhecimento é amplamente conhecido e vem sendo estudado e aplicado em grandes organizações a muito tempo para viabilizar . Já a gestão do conhecimento pessoal, ou personal knowledge management (PKM), é um termo mais recente pois as discussões sobre o tema só ganharam força nas últimas duas décadas.
+
+Um conceito amplo de PKM é desenvolvido por @kassim2018 que traz uma abordagem de processo quando diz que a gestão do conhecimento pessoal é uma estratégia de expansão do conhecimento pessoal que envolve a transformação da informação desorganizada em conhecimento útil através da obtenção, avaliação, organização , colaboração, análise e apresentação do conhecimento. Neste ponto é importante destacar a importância da administração da informação, isso fica evidente quando verificamos que as ferramentas de PKM, sejam softwares ou modelos tem grande foco na administração da informação [@völkel2009].
+
+Existem outras abordagens para o PKM, como a de @theseek, que apresenta algumas estruturas para entender os mecanismos por traz da prática. Para @theseek, o domínio sobre a gestão do conhecimento pode ser buscado através do modelo Seek\>\>Sense\>\>Share, que aprofunda o conceito geral como o que é apresentado por @kassim2018 e outros autores.
+
+Com o crescimento nas pesquisas sobre o PKM surgiram diversas ferramentas e frameworks que buscam de alguma forma viabilizar ou facilitar esse processo. Porém, para aplicar os conceitos de PKM não é necessário ter uma ferramenta específica, pode-se usar ou adaptar de acordo com disponibilidade de recursos.
+
+Neste sentido as iniciativas de software livre ajudam a criar um ambiente perfeito para implementação das práticas de gestão do conhecimento pessoal que ao contrário da gestão do conhecimento tradicional aplicada por grandes empresas, prevê a disseminação do conhecimento de forma aberta.
+
+Neste trabalho será explorado o QUARTO [@Allaire_Quarto_2022], um sistema de código aberto para publicação técnico-científica, que possui características que ajudam na viabilização de práticas de PKM. Para facilitar a compreensão serão explorados os conceitos de PKM segundo a metodologia seek, sense, share de @theseek.
 
 # Objetivo
 
-# Aplicação
+O objetivo deste capítulo é entender e explorar o QUARTO como uma ferramenta de PKM aliado à pesquisa científica, utilizando a metodologia seek, sense, share. Para isso serão apresentados os conceitos estudados por @theseek e como eles podem ser aplicados em cada uma das etapa do desenvolvimento de uma pesquisa científica feita usando o QUARTO. Além disso também serão apresentados métodos e técnicas para a aplicação do PKM em cada uma das etapas.
 
-# Resultados e Discussão
+# O QUARTO
+
+Quem já usou R por algum tempo, provavelmente teve contato com o rmarkdown [@xieMarkdownDefinitiveGuide2019], um formato de documento baseado em markdown que permite a editoração de arquivos que podem intercalar linguagens de programação como R e Python com texto, algo semelhante ao conhecido Jupiter Notebook. Essa idea de intercalar texto e código não é nova e foi explorada por @knuthLiterateProgramming1992, que criou o conceito de programação letrada, onde o programa é feito em um notebook que contém o código e a explicação ou documentação.
+
+Antes da criação do rmarkdown, o conceito criado por Knuth foi aplicado usando noweb [@johnsonLiterateProgrammingUsing] e Sweave no R [@friedrichleischSweavePartMixing2002], que permitiam o uso de Latex e R dentro do mesmo documento com a intenção de facilitar a reprodução de resultados de pesquisas científicas. Assim, inspirado pelo conceito de programação letrada e pelo Sweave @xieDynamicDocumentsKnitr2014 introduziu o Knitr que usava os conceitos do Sweave e dos pacotes que foram criados para suprir suas limitações, como o cache de resultados e a possibilidade de usar outros formatos de saída além do Latex, como HTML e Markdown, além de viabilizar o uso de outras linguagens de programação além do R, culminando posteriormente no formato que se popularizou, o rmarkdown.
+
+A partir do desenvolvimento do rmarkdown a Posit apresentou em 2022 o QUARTO [@Allaire_Quarto_2022], um sistema completo de editoração e publicação técnico-científica baseado em Pandoc que expandiu as possibilidades criadas pelo rmarkdown dentro do conceito de programação letrada. O quarto permite a criação de diversos tipos de documentos, de artigos e livros a sistemas de enciclopédia (Wikis) e outros tipos de sites como blogs. Seguindo a tradição de software livre do rmarkdown, o QUARTO é um sistema de código aberto e pode ser usado gratuitamente por qualquer pessoa ou organização. A característica mais marcante é possibilidade de editar os arquivos com a linguagem de marcação preferencial do usuário, é possível usar Latex, html, markdown, css e scss por exemplo.
+
+Considerando a história que levou ao desenvolvimento do QUARTO é possível traçar um paralelo entre os paradigmas de programação letrada e os conceitos de PKM pois o objetivo final de ambos está associado a construção e disseminação do conhecimento. Além disso, o próprio processo que levou ao desenvolvimento das soluções para programação letrada dentro de um ambiente de desenvolvimento de software livre, representado pela linguagem de programação R, também pode ser associado ao conceito de PKM, pois software livre envolve além do próprio desenvolvedor os usuário e comunidades práticas criadas em ambientes abertos como o GitHub, onde o QUARTO e o rmarkdown foram criados e são mantidos.
+
+## Como usar o QUARTO
+
+Ao contrário do rmarkdown o QUARTO não está preso a uma linguagem ou ambiente de programação único, é possível usá-lo com qualquer editor de texto ou IDE e renderizar os documentos através do terminal do sistema operacional após instalar a sua interface de linha de comando. Porém, ao usar ambientes de programação como o VSCode, RStudio ou Jupyter é possível fazer a edição e renderização dos documentos através de interface visual e atalhos de teclado. Além do R os desenvolvedores oferecem oficialmente suporte para Python, Julia e Observable.
+
+Outra característica é a facilidade para publicação dos documentos criados, qualquer usuário pode criar um blog por exemplo, sem ter conhecimento prévio em html. Basta criar um projeto com esse formato predefinido e começar a escrever e publicar posteriormente em um servidor ou através dos serviços oferecidos pela POSIT, GitHub ou outras empresas que oferecem hospedagem grátis. Um exemplo de site criado com esse sistema pode ser visto em <https://quarto.org>.
+
+Para instalar o sistema é necessário baixar o instalador do site oficial <https://quarto.org/docs/get-started/>, escolhendo o sistema operacional que será usado.
+
+
+Também é possível realizar a instalação em ambiente Linux em distribuições como o Ubuntu, basta executar os comandos da @fig-bash no terminal[@Allaire_Quarto_2022] ou seguir as instruções atualizadas do site oficial <https://docs.posit.co/resources/install-quarto/>.
+
+:::{#fig-bash fig-cap="Instalação do QUARTO em ambiente Linux"}
+``` bash
+export QUARTO_VERSION="1.2.262" # <1>
+
+sudo mkdir -p /opt/quarto/${QUARTO_VERSION} # <2>
+
+sudo curl -o quarto.tar.gz -L \ 
+    "https://github.com/quarto-dev/quarto-cli/releases/download/v${QUARTO_VERSION}
+    /quarto-${QUARTO_VERSION}-linux-amd64.tar.gz" # <3>
+
+sudo tar -zxvf quarto.tar.gz \
+    -C "/opt/quarto/${QUARTO_VERSION}" \ 
+    --strip-components=1 # <4>
+
+sudo rm quarto.tar.gz # <5>
+
+/opt/quarto/"${QUARTO_VERSION}"/bin/quarto check # <6>
+```
+:::
+1.  Escolhe a versão do QUARTO que será instalada.
+2.  Cria um novo diretório para a instalação.
+3.  Baixa o arquivo compactado com a versão escolhida.
+4.  Descompacta o arquivo no diretório criado.
+5.  Remove o arquivo compactado.
+6.  Verifica se a instalação foi bem sucedida.
+
+
+Após a instalação e criação de um arquivo com a extensão .QMD, o próximo passo em um documento básico é a criação de um cabeçalho YAML, para viabilizar a criação dos metadados do documento. O cabeçalho é delimitado por três traços e pode conter informações como título, autor, data, resumo, palavras chave, etc. Um exemplo de cabeçalho YAML pode ser visto na @fig-yaml.
+
+:::{#fig-yaml fig-cap="Exemplo de cabeçalho YAML"}
+```{yaml}
+---
+title: O Quarto como ferramenta de PKM para pesquisa científica
+author: Marcus Antonio Cardoso Ramalho
+date: 2023-07-30
+---
+```
+:::
+
+Se o formato não for especificado usando o parâmetro `format` no cabeçalho, o documento será renderizado como html por padrão. Além disso é possível explicitar também a engine usada que pode variar de acordo com o ambiente de programação escolhido. A @fig-engine mostra o fluxo de renderização padrão de um documento usando o QUARTO, onde é possível verificar que a primeira etapa consiste da conversão do para o formato markdown, que é feita pelo Jupyter, no ambiente do Rstudio essa etapa é feita pelo knitr.
+
+:::{#fig-engine fig-cap="Fluxo de renderização de um documento usando o QUARTO"}
+```{mermaid}
+flowchart LR
+    qmd(QUARTO) --> jupyter(Jupyter)
+    qmd(QUARTO) --> knitr(Knitr)
+    jupyter --> md(markdown)
+    knitr(Knitr) --> md(markdown)
+    md --> pandoc(pandoc)
+    pandoc --> html[html]
+    pandoc --> pdf[pdf]
+    pandoc --> docx[docx]
+
+```
+:::
+
+# O PKM para Harold Jarche
+
+
+
+# O QUARTO como ferramenta de PKM
+
+# Aplicação
 
 # Conclusão
 
