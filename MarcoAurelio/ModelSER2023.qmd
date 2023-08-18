@@ -34,7 +34,34 @@ editor: visual
 Este trabalho apresenta os principais aspectos da Inteligência Artificial, com suas aplicações à Engenharia de maneira geral mas focadas na Engenharia Civil, considerando a sua multidisciplinaridade, quais sejam as disciplinas Arquitetura, Engenharia Mecânica, Engenharia Mecatrônica, Robótica, Computação, Engenharia de Sistemas, Meio Ambiente, dentre outros. 
 A simulação numérica é abordada em Engenharia desde o advento do computador e diversos métodos numéricos foram sendo criados por pesquisadores e cientistas ao longo do tempo, destacando-se, dentre outros, Diferenças Finitas, Elementos Finitos, Elementos de Contorno, Volumes Finitos, de acordo com Ferro (2002). 
 Há várias definições sobre o significado de Inteligência Artificial na literatura que trata do assunto, destacando-se o descrito no livro de Stuart e Norvig (2003) . Ela pode ser entendida como a ciência que procura simular o comportamento humano (peopleware) com o uso de programas de computadores (softwares) e máquinas (hardwares),(ver figura 1).
-A simulação em Inteligência Artificial é realizada por diversas técnicas, cada uma utilizada sozinha ou em combinação com outras, de acordo com o seu objetivo, destacando-se: Redes Neurais Artificiais (RNA)/Artificial Neural Network (ANN), Aprendizado de Máquinas (AM)/Machine Learning (ML), Aprendizado Profundo (AP) /Deep Learning (DL), Algoritmos Genéticos (AG)/Genetic ATENÇÃO Este template ilustra e orienta os autores que deverão submeter o assunto de sua palestra apresentada no VII SER na forma de capítulo de livro. Após uma explicação sucinta do estágio atual da Inteligência Artificial, as suas disciplinas e seu comportamento multidisciplinar, serão apresentadas as técnicas utilizadas em um exemplo de aplicação na Engenharia Civil, que é uma Lar Inteligente, podendo ser uma casa ou um apartamento. Os resultados e conclusões encerram o presente trabalho, onde também serão descritas expectativas para o futuro da Inteligência Artificial aplicada à Engenharia Civil.
+A simulação em Inteligência Artificial é realizada por diversas técnicas, cada uma utilizada sozinha ou em combinação com outras, de acordo com o seu objetivo, destacando-se: Redes Neurais Artificiais (RNA)/Artificial Neural Network (ANN), Aprendizado de Máquinas (AM)/Machine Learning (ML), Aprendizado Profundo (AP) /Deep Learning (DL), Algoritmos Genéticos (AG)/Genetic Algorythms. Após uma explicação sucinta do estágio atual da Inteligência Artificial, as suas disciplinas, destacando-se gêmeos digitais, metaverso, computação quântica e o ChatGPT e seu comportamento multidisciplinar, serão apresentadas as técnicas utilizadas em um exemplo de aplicação na Engenharia Civil, que é a predição da resistência do concreto, quando saõ mostradas as considerações finais.
+O Aprendizado de Máquina (Machine Learning) é um método de análise de dados que busca a automação, o desenvolvimento e a criação de modelos analíticos. 
+É baseado na hipótese de que sistemas computacionais (software e hardware)  podem aprender com dados genéricos, estruturados ou não, identificar padrões e tomar decisões com o mínimo de intervenção humana (peopleware). 
+Aprendizagem Profunda (Deep Learning) é um termo adotado dentro do campo do Aprendizado de Máquinas sendo formado por programas, computadores, sensores e dispositivos inteligentes, conectados entre si e que desempenham suas tarefas sem a necessidade de ações humanas. 
+É um tipo especializado do Aprendizado de Máquinas, com um linguajar matemático mais especializado. 
+É muito utilizado no reconhecimento de face, de voz e nos processamentos de imagem e de linguagem.
+Redes Neurais Artificiais (Artificial Neural Network) são sistemas de computação com nós interconectados que funcionam como o sistema nervoso do ser humano.
+Gêmeos digitais são cópias digitais das estruturas reais. Possuem sensores que permitem a aquisição de grandezas importantes como deslocamentos e temperatura, por exemplo.
+São capazes de identificar falhas e tomar decisões sobre manutenção preventiva e corretiva.
+Computação quântica: Os computadores quânticos aproveitam o comportamento exclusivo da física quântica, como sobreposição, emaranhamento e interferência quântica, e o aplicam à computação. Isso apresenta novos conceitos para os métodos de programação tradicionais. No entanto, por ser uma tecnologia pouco acessível ao público, o tema ainda causa dúvidas.
+O que é o Metaverso? O metaverso é um mundo 3D virtual compartilhado, ou mundos, que são interativos, imersivos e colaborativos. Assim como o universo físico é uma coleção de mundos conectados no espaço, o metaverso também pode ser considerado um conjunto de mundos conectados digitalmente. O metaverso se tornará uma plataforma que não estará vinculada a nenhuma aplicação ou ambiente único, digital ou real.
+O Chat GPT é um algoritmo baseado em inteligência artificial (machine learning e redes neurais). Ele foi criado por um laboratório de pesquisas em inteligência artificial chamado OpenAI, com sede em San Francisco, EUA. O nome Chat GPT é uma sigla para “Generative Pre-Trained Transformer”.
+O sucesso da ferramenta está em oferecer ao usuário uma forma simples de conversar e obter respostas. A gama de assuntos é bem vasta e o Chat GPT é capaz de elaborar textos sobre assuntos variados.
+O conhecimento da Resistência do Concreto à Compressão é fundamental no Cálculo de Estruturas.
+Essa característica depende de vários fatores, destacando-se a taxa de cimento (kg/m3), taxa de escória (kg/m3), cinzas (kg/m3), água (kg/m3), superplastificante (kg/m3), agregado 			graúdo ou brita (kg/m3), agregado miúdo ou 			areia (kg/m3), idade (dias), resistência do 				concreto (MPa).
+EXEMPLO DE REDES NEURAIS COM R – PREDIÇÃO DA RESISTÊNCIA DO CONCRETO
+cement,slag,ash,water,superplastic,coarseagg,fineagg,age,strength 141.3,212,0,203.5,0,971.8,748.5,28,29.89 168.9,42.2,124.3,158.3,10.8,1080.8,796.2,14,23.51 250,0,95.7,187.4,5.5,956.9,861.2,28,29.22 
+266,114,0,228,0,932,670,28,45.85
+
+				ALVO = 0.3014
+				Rodada com 1 camada 0.3259, r = 0.806
+				Rodada com 2 camadas 0.2929, r= 0.924
+5. CONCLUSÕES
+A IA está entre nós.
+A IA pode nos ajudar a eliminar ou diminuir tarefas repetitivas e mecânicas.
+A IA pode tornar os trabalhos mais eficazes, eficientes e efetivos.
+Qual é o limite da IA? Relações ou Sentimentos Humanos? Ética?
+
 
 Os autores devem redigir o CAPÍTULO utilizando este template, que está no formato adequado para a PRODUÇÃO DO EBOOK DE PALESTRAS DO VI SER -- Seminário Internacional de Estatística com R.
 
