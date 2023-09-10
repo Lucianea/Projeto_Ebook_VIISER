@@ -1,0 +1,112 @@
+---
+title: INTELIGÊNCIA ARTIFICIAL APLICADA À ENGENHARIA
+titlerunning: Short form of title (if too long for head)
+authorrunning:
+  Short form of author list if too long for running head
+lang: pt
+style: justify
+number-sections: true
+authors:
+  - name: Marco Aurélio Chaves Ferro 
+    address: Programa de Pós-Graduação em Engenharia Civil - UFF
+    email: marcoferro@id.uff.br
+abstract: |
+  O presente trabalho apresenta as principais características e metodologias de Inteligência Artificial adotadas em Engenharia, com destaque para a Engenharia Civil. Sâo descritos os aspectos fundamentais de Aprendizado de Máquinas (Machine Learning) e Aprendizado Profundo (Deep Leaerning) e suas principais técnicas, com enfoque especial em Redes Neurais Artificiais (Artificial Neural Network). Alguns exemplos de utilização da Inteligência Artificial são mostrados, como Gêmeos Digitais, Computação Quântica, Metaverso e ChatGPT. O exemplo de aplicação mostra a predição da resistência do concreto à compressão, usando-se uma planilha disponível na internet (dataset), com 1032 experimentos realizados em laboratório. O código R do programa usou a técnica de Redes Neurais Artificiais para obter os resultados que foram plenamente satisfatórios. 
+
+  Palavras Chave: Inteligência Artificial; Redes Neurais Artificiais; Linguagem R.
+bibliography: References.bib
+#output:
+#  articles::springer_article
+format: pdf
+editor: visual
+---
+
+# Introdução
+
+Este trabalho apresenta os principais aspectos da Inteligência Artificial, com suas aplicações à Engenharia de maneira geral, no entanto focado na Engenharia Civil, considerando a sua multidisciplinaridade, quais sejam as disciplinas Arquitetura, Engenharia Mecânica, Engenharia Mecatrônica, Robótica, Computação, Engenharia de Sistemas, Meio Ambiente, dentre outras, conforme ilustrado na @fig-Figura1, a seguir.
+
+![Multidisciplinaridade da IA na Engenharia Civil. Fonte: O autor.](Figura1.png){#fig-Figura1 width="60%" fig-align="center" fig.cap="center"}
+
+A simulação numérica é abordada em Engenharia desde o advento do computador e diversos métodos numéricos foram sendo criados por pesquisadores e cientistas ao longo do tempo, destacando-se, dentre outros, Diferenças Finitas, Elementos Finitos, Elementos de Contorno, Volumes Finitos, de acordo com [@Ferro]. Há várias definições sobre o significado de Inteligência Artificial na literatura que trata do assunto, destacando-se o descrito no livro de [@Russell]. Ela pode ser entendida como a ciência que procura simular o comportamento humano (peopleware) com o uso de programas de computadores (softwares) e máquinas (hardwares), conforme ilustrado na @fig-Figura2.
+
+![Tripé da Inteligência Artificial. Fonte: O autor.](Figura2.png){#fig-Figura2 width="60%" fig-align="center" fig.cap="center"}
+
+# Objetivo
+
+A simulação em Inteligência Artificial é realizada por diversas técnicas, cada uma utilizada sozinha ou em combinação com outras, de acordo com o seu objetivo, destacando-se Redes Neurais Artificiais (RNA)/Artificial Neural Network (ANN), Aprendizado de Máquinas (AM)/Machine Learning (ML), Aprendizado Profundo (AP) /Deep Learning (DL), Algoritmos Genéticos (AG)/Genetic Algorythms, dentre outros. Após uma explicação sucinta de algumas aplicações da Inteligência Artificial, destacando-se gêmeos digitais, metaverso, computação quântica e o ChatGPT, será apresentada a técnica de Redes Neurais Artificiais que foi utilizada em um exemplo de aplicação na Engenharia Civil, que é a predição da resistência do concreto, quando são mostradas as considerações finais.
+
+O Aprendizado de Máquina (Machine Learning) é um método de análise de dados que busca a automação, o desenvolvimento e a criação de modelos analíticos. É baseado na hipótese de que sistemas computacionais (software e hardware) podem aprender com dados genéricos, estruturados ou não, identificar padrões e tomar decisões com o mínimo de intervenção humana (peopleware).
+
+Aprendizagem Profunda (Deep Learning) é um termo adotado dentro do campo do Aprendizado de Máquinas sendo formado por programas, computadores, sensores e dispositivos inteligentes, conectados entre si e que desempenham suas tarefas sem ou com muito pouca necessidade de ações humanas. É um tipo especializado do Aprendizado de Máquinas, com um linguajar matemático mais especializado. É muito utilizado no reconhecimento de face, de voz e nos processamentos de imagem e de linguagem. Redes Neurais Artificiais (Artificial Neural Network) são sistemas de computação com nós interconectados que funcionam como o sistema nervoso do ser humano.
+
+Gêmeos digitais, conforme ilustrado na @fig-Figura3, são cópias digitais das estruturas reais. Possuem sensores que permitem a aquisição de grandezas importantes como deslocamentos e temperatura, por exemplo. São capazes de identificar falhas e tomar decisões sobre manutenção preventiva e corretiva.
+
+![Gêmeos Digitais:saiba o que é. Fonte: [@pederneiras].](Figura3.png){#fig-Figura3 width="60%" fig-align="center" fig.cap="center"}
+
+Os computadores quânticos (ver @fig-Figura4) aproveitam o comportamento exclusivo da física quântica, como sobreposição, emaranhamento e interferência quântica, e o aplicam à computação. Isso apresenta novos conceitos para os métodos de programação tradicionais. No entanto, por ser uma tecnologia pouco acessível ao público, o tema ainda causa dúvidas e controvérsias
+
+![Computador Quântico. Fonte: [@mitsloanreview].](Figura4.png){#fig-Figura4 width="60%" fig-align="center" fig.cap="center"}
+
+O metaverso é um mundo 3D virtual compartilhado, ou mundos, que são interativos, imersivos e colaborativos (ver @fig-Figura5) . Assim como o universo físico é uma coleção de mundos conectados no espaço, o metaverso também pode ser considerado um conjunto de mundos conectados digitalmente. O metaverso se tornará uma plataforma que não estará vinculada a nenhuma aplicação ou ambiente único, digital ou real.
+
+![Metaverso .Fonte: [@mittr].](Figura5.png){#fig-Figura5 width="60%" fig-align="center" fig.cap="center"}
+
+O Chat GPT é um algoritmo baseado em Inteligência Artificial (machine learning e redes neurais). Ele foi criado por um laboratório de pesquisas em Inteligência Artificial chamado OpenAI, com sede em San Francisco, EUA. O nome Chat GPT é uma sigla para "Generative Pre-Trained Transformer". O sucesso da ferramenta está em oferecer ao usuário uma forma simples de conversar e obter respostas. A gama de assuntos é bem vasta e o Chat GPT é capaz de elaborar textos sobre assuntos variados, dentre inúmeras outras tarefas.
+
+# Aplicações
+
+Algumas aplicações da Inteligência Artificial na Engenharia Civil são mostradas nas figuras a seguir. Todos eles demonstram que na Inteligência Artificial traz como resultados extrema precisão , rapidez, segurança, economia de material e de mão de obra, dentre muitas outras vantagens.
+
+O primeiro exemplo é o uso de robôs para assentamento de alvenaria de tijolos, conforme visto nas figura @fig-Figura6.
+
+![Assentamento de alvenaria com robô. Fonte: [@theb1m].](Figura6.png){#fig-Figura6 width="60%" fig-align="center" fig.cap="center"}
+
+O segundo exemplo é a colocação de armadura de aço e sua amarração com arames, com o uso de robôs, ver @fig-Figura7.
+
+![Execução de amarração de armadurta de laje com robô. Fonte: [@theb1m].](Figura7.png){#fig-Figura7 width="60%" fig-align="center" fig.cap="center"}
+
+O terceiro exemplo consiste no transporte de material pesado por um robô, ao invés do uso de carrinho de mão por operários, conforme mostrado na @fig-Figura8,
+
+![Transporte de material pesado em obra por robô. Fonte: [@theb1m].](Figura8.png){#fig-Figura8 width="60%" fig-align="center" fig.cap="center"}
+
+O quarto exemplo mostra o serviço de terraplenagem realizado por máquinas automatizadas, conforme visto na @fig-Figura9.
+
+![Serviço automatizado de terraplenagem. Fonte: [@theb1m].](Figura9.png){#fig-Figura9 width="60%" fig-align="center" fig.cap="center"}
+
+A evolução de fiscalização de obras pode ser evidenciada no quinto exemplo. A grande maioria das medições e verificações realizadas na fiscalização de obras é feita de forma tradicional, utilizando materiais como trenas, esquadros, níveis, calculadoras, pranchetas, dentre outros, como visto na @fig-Figura10
+
+![Fiscalização de obra tradicional. Fonte: [@portilho].](Figura10.png){#fig-Figura10 width="60%" fig-align="center" fig.cap="center"}
+
+Uma evolução tecnológica da fiscalização de obras é o uso de óculos especiais (ver @fig-Figura11) que verificam instalações (ver @fig-Figura12), fazem medições, enviam relatórios para o escritório indicando não conformidades, dentre outros.
+
+![Óculos especial para medição de obras. Fonte: [@SRI].](Figura11.png){#fig-Figura11 width="60%" fig-align="center" fig.cap="center"}
+
+![Verificação de instalações .Fonte: [@SRI].](Figura12.png){#fig-Figura12 width="60%" fig-align="center" fig.cap="center"}
+
+Uma evolução ainda mais avançada é o uso de um robô (ver @fig-Figura13) fara realizar os serviços de fiscalização de obras, e na @fig-Figura14) podem ser verificadas as medições atualizadas, ou seja, 78,28%, 42,61% e 83,26% do total, executados para os serviços mecânicos, elétricos e hidrossanitários, respectivamente. O cronograma está com 78,2% executado, em relação ao previsto, indicando atraso de 21,8%.
+
+![Robõ para fiscalizar obras. Fonte: [@Doxel].](Figura13.png){#fig-Figura13 width="60%" fig-align="center" fig.cap="center"}
+
+![Fiscalização de obras com robô. Fonte: [@Doxel].](Figura14.png){#fig-Figura14 width="60%" fig-align="center" fig.cap="center"}
+
+O conhecimento da Resistência do Concreto à Compressão é fundamental no Cálculo de Estruturas de Concreto. Essa característica depende de vários fatores, destacando-se a taxa de cimento (kg/m3), taxa de escória (kg/m3), cinzas (kg/m3), água (kg/m3), superplastificante (kg/m3), agregado graúdo ou brita (kg/m3), agregado miúdo ou areia (kg/m3), idade (dias), resistência do concreto (MPa). Um arquivo de dados com 1030 linhas na forma de planilha eletrônica está disponibilizado em [@UCI] e foi criado por [@Yeh]. O exemplo consta do livro de [@Lantz], em seu capítulo 7, na página 229. As quatro primeiras linhas do arquivo de dados estão mostradas na @fig-Figura15.
+
+![4 primeiras linhas do arquivo de dados. Fonte: [@Lantz].](Figura15.png){#fig-Figura15 width="80%" fig-align="center" fig.cap="center"}
+
+Uma linha aleatória do conjunto de dados foi separada para verificação da Rede Neural Artificial, cujo resultado final é uma Resistência do Concreto de 30,14 MPa, o que é denominado alvo.
+
+A primeira rede a ser rodada consta de apenas um neurônio (perceptron) e está mostrada na @fig-Figura16.
+
+![Rede Neural com um neurônio. Fonte: [@Lantz].](Figura16.png){#fig-Figura16 width="60%" fig-align="center" fig.cap="center"}
+
+# Resultados e Discussões
+
+O resultado indicou um valor predito de 32,59 MPa e coeficiente de correlação (r) igual a 0,806. Em seguida foi rodada uma Rede Neural Artificial com uma camada oculta e cinco neurônios, sendo o valor predito igual a 29,29 MPa e o coeficiente de correlação (r) igual a 0,924. A Rede Neural Artificial pode ser aperfeiçoada ao aumentar-se o número de camadas ocultas e de neurônios por camada, assim como usar outras funções de ativação, de erro e demais hiperparâmetros. Comparado com o alvo, ou seja 30,14 MPa, o resultado de 29,29 MPa dá um erro relativo de -2,82%, o que já pode ser considerado excelente.
+
+O código em R que resolve o problema está disponibilizado em https://github.com/PackPublishing/Machine-Learning-with-R-Third-Edition ou https://github.com/dataspelunking/MLwR.
+
+# Conclusões
+
+A Inteligência Artificial está no dia a dia das pessoas. Ela pode ajudà-las a eliminar ou diminuir tarefas repetitivas e mecânicas e tornar os trabalhos mais eficazes, eficientes e efetivos. Várias aplicações da Inteligência Artificial foram apresentadas neste capítulo e um exemplo prático da predição da Resistência do Concreto com Redes Neurais Artificiais foi desenvolvido. Os resultados mostraram-se excelentes e muitas outras aplicações de Inteligência Artificial podem ser elaboradas nas diversas áreas da Engenharia.
+
+# Referências {#sec-referências}
