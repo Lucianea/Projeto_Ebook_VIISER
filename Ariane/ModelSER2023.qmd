@@ -1,26 +1,20 @@
 ---
-title: TÍTULO COMPLETO, EM LETRAS MAIÚSCULAS
-subtitle: subtítulo caso exista. 
-titlerunning: Short form of title (if too long for head)
-authorrunning:
-  Short form of author list if too long for running head
+title: 'Quarto book: Contando histórias com Quarto'
 lang: pt
 style: justify
 number-sections: true
-thanks: |
-  Agradecimentos ou outras notas sobre o capítulo devem ser colocadas aqui. Agradecimentos gerais 
-  devem ser colocados no fim do capítulo. 
 authors:
-  - name: Nome Completo do 1º Autor
-    address: Department of YYY, University of XXX
-    email: abc@def
-  - name: Nome Completo do 2º Autor 
-    address: Department of ZZZ, University of WWW
-    email: djf@wef
+  - name: Ariane Hayana Thomé de Farias
+    city: Boa Vista
+    state: Roraima/RR/BR
+    email: ariane.hayana@gmail.com
+
 abstract: |
-  Coloque aqui o resumo contendo no máximo 1500 caracteres sem contar espaços, em um único parágrafo. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi dictum dui tincidunt, pellentesque eros ac, tincidunt tortor. Duis porttitor diam quam, a efficitur mi gravida ac. Duis auctor dui accumsan, tempus sem consectetur, consectetur magna. Integer ac augue sed odio aliquet scelerisque sollicitudin in justo. Integer viverra dictum libero, eu euismod nunc blandit eget. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Ut nulla neque, tempus eu varius vel, ultrices placerat nulla. Sed ut orci ut tellus vehicula molestie vel ultrices risus. Aenean vulputate ipsum sed dolor consectetur aliquam. Mauris luctus aliquam nibh, sit amet rhoncus nisi auctor sed. Nunc vel ipsum nec tellus aliquam facilisis iaculis vitae velit. Vestibulum sodales tortor lobortis varius rhoncus. Suspendisse aliquet magna sit amet urna interdum consectetur. Nulla et turpis vel augue lobortis elementum id vel diam. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Pellentesque consequat ut tellus id fermentum. Nullam eu aliquet ipsum, a lobortis dolor. In pulvinar, elit eu pellentesque vulputate, sem risus vulputate dui, congue bibendum lacus nisl ut nunc. Praesent velit sem, dictum vitae posuere nec, condimentum eget lacus. Suspendisse ante ante, ultricies in consequat vel, tincidunt a justo. Donec. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Ut nulla neque, tempus eu varius vel, ultrices placerat nulla. Sed ut orci ut tellus vehicula molestie vel ultrices risus. 
   
-  Palavras Chave: Máximo de 5 palavras chave separadas por ponto e vírgula (;).
+  Com o avanço das tecnologias, automatizar processos repetitivos tornou-se de fundamental importância para otimizar o tempo e gerar *insights* para uma melhor tomada de decisão. Um ponto cabe destaque: em meio a tantas ferramentas, como comunicar seus resultados? Traduzir dados em informação é uma tarefa que, caso não seja bem executada, pode não expressar o que se deseja. Dentre as possibilidades atuais de desenvolvimento de produtos automatizados, temos o Quarto, a nova geração de `R` *Markdown*. Assim, com objetivo de explorar as funcionalidades e a criação de um livro desenvolvido em *Quarto*, este capítulo abordará conceitos, definições e orientações para o desenvolvimento de um livro desde a instalação do Quarto até a etapa de publicação no Quarto Pub.
+  
+  Palavras-Chave: Quarto; Livro; R.
+  
 bibliography: References.bib
 #output:
 #  rticles::springer_article
@@ -28,194 +22,306 @@ format: pdf
 editor: visual
 ---
 
-# Introdução
+# Introdução {#sec-intro}
 
-ATENÇÃO Este template ilustra e orienta os autores que deverão submeter o assunto de sua palestra apresentada no VII SER na forma de capítulo de livro.
+Traduzir dados complexos em um conteúdo de fácil entendimento não é uma tarefa trivial considerando que, embora existam diversas ferramentas para a apresentação de resultados, de nada adianta se a abordagem utilizada não for adequada para comunicar com os tomadores de decisão. A imensa quantidade de dados disponível nas mais diversas fontes é uma realidade desafiadora para extrair *insights* e gerar resultados e neste sentido, uma das possibilidades para a contextualização de narrativas embasadas em dados é através da utilização do Quarto. Com ele, é possível criar diversos produtos, tais como relatórios automatizados em `html`, `pdf`, `epub`, assim como possibilita a criação de *blogs* que podem ser atualizados e compartilhados na *web* de forma rápida e em versões multilíngues, com conteúdo textual e em códigos nas linguagens `R`, `Python` e `Julia`, por exemplo. Neste contexto, este capítulo visa explorar as funcionalidades do *Quarto Book* desde a instalação, com orientações de quais são os requesitos necessários para a utilização do Quarto localmente e na nuvem. Também será apresentado a estrutura básica de um documento Quarto e, por fim, o passo a passo dos procedimentos necessários para publicação do *Quarto Book*.
 
-Os autores devem redigir o CAPÍTULO utilizando este template, que está no formato adequado para a PRODUÇÃO DO EBOOK DE PALESTRAS DO VI SER -- Seminário Internacional de Estatística com R.
+No que se refere à organização deste capítulo, este trabalho encontra-se organizado em seções dispostas da seguinte forma: além desta seção introdutória, o objetivo é apresentado na @sec-obj. Também são apresentadas as aplicações do Quarto, contextualizando definições e pilares da utilização do Quarto na @sec-aplicacao. Nesta seção também são abordados os passos necessários para a publicação do *Quarto Book* no Quarto Pub. Na @sec-resultados temos os resultados de um modelo exemplificativo do livro personalizado. Por fim, a @sec-conclusao são apresentadas as considerações finais e posteriormente, as referências.
 
-Os CAPÍTULOS submetidos ao comitê organizador poderão ser redigidos em português, espanhol ou inglês. O texto submetido submetido, em formato do *quarto*, deve estar acompanhado do respectivo **.pdf**, do arquivo *.bib* de referências bibliográficas e das figuras utilizadas em formato *.png* ou *.jpeg*. Todos estes arquivos devem ser colocados em uma pasta nomeada com o nome da primeiro autor (Decidir isso melhor!).
 
-O texto integral do CAPÍTULO deve possuir no **MÍNIMO 10 páginas**, com Título, Resumo (parágrafo único e espaço simples), Palavras-chave, respeitando a seguinte estrutura especificada neste template:
+# Objetivo {#sec-obj}
 
-1.  Introdução
-2.  Objetivo
-3.  Aplicação
-4.  Resultados e Discussão
-5.  Conclusão
-6.  Referências
-7.  Anexo (os códigos podem ser disponibilizados na seção de Aplicação ou em Anexo se for mais conveniente). Sugerimos disponibilizar os códigos via GitHub.
+O objetivo principal deste capítulo é apresentar as etapas de criação de um livro desenvolvido com Quarto, trazendo orientações preliminares sobre conceitos básicos para a criação deste, com a exemplificação de um livro e sua publicação no Quarto Pub.
 
-No momento da submissão, os nomes dos autores (MÁXIMO DE 2 AUTORES), seus e-mails e as instituições de origem devem ser incluídos nos locais específicos deste modelo.
+# Aplicação {#sec-aplicacao}
 
-Observações importantes:
+Quarto é uma versão multilíngue da próxima geração do `R` Markdown e com ele é possível criar relatórios automatizados tanto com a linguagem R, como em Python e Julia. Além disso, pode-se criar diversos tipos de documentos, apresentações, livros, *blogs*, entre outros recursos. O objetivo neste capítulo consiste em abordar as etapas de desenvolvimento de um livro com Quarto, remetendo aos procedimentos necessários para a criação do *Quarto book* no RStudio. Para tanto, a primeira etapa metodológica é realizar as instalações necessárias para utilizar o Quarto no RStudio. Ressalta-se que Quarto é um *software* independente de `R` e pode ser utilizado em diversas ferramentas (RStudio, VS Code, Jupyter Lab, por exemplo). Assim, os pré-requisitos são:
 
--   Todas as referências, figuras e tabelas devem estar corretamente citadas no texto.
+-   Baixar e instalar a versão mais recente do Quarto disponível neste [link](https://quarto.org/docs/get-started/);
 
--   Todas as figuras e tabelas devem ser fornecidas em formato *.png* em resolução adequada.
+-   Baixar e instalar a versão mais recente do `R` clicando [aqui](https://cran.r-project.org/). Caso já tenha, verifique se o seu `R` está atualizado;
 
-    <div>
+-   Baixar e instalar a [versão mais recente do RStudio](https://posit.co/download/rstudio-desktop/);
 
-    -   Nomear as Figuras de acordo com a ordem em que aparecem no texto. Por exemplo **Figura01.png** é o nome da primeira figura que aparece no texto.
-
-    </div>
-
--   Uma cópia *.png* de cada uma das figuras geradas utilizando o *Quarto* deve ser fornecida.
-
-    -   Um exemplo para salvar uma cópia de figura gerada com o quarto é fornecido a seguir.\
-
--   Certifique-se de que o arquivo *.bib* contenha as referências de forma correta, ou seja, contenha as informações necessárias para a respectiva utilização.
-
-    -   Alguns exemplos de formtação das entradas do .bib podem ser observadas diretamente na @sec-exemplo.
-    -   Outros exemplos estão disponíveis no arquivo de referencias *References.bib*.
-
--   Não utilizar notas de rodapé.
-
--   A maneira correta de fazer a citação é *\@NomeDaReferencia*. Por exemplo, o comando \@hadley produz @hadley.
-
-# Objetivo
-
-Nesta seção deverão ser apresentados os objetivos do estudo/palestra.
-
-# Aplicação
-
-Nesta seção deverão ser especificados os procedimentos, o contexto e a aplicação realizada.
-
-# Resultados e Discussão
-
-Deverá apresentar uma síntese dos resultados encontrados, podendo incluir tabela e/ou figura. Nesta seção devem ser incluídos comentários sobre os resultados e comparação dos achados do estudo com os de outras publicações.
-
-As tabelas e figuras (Entende-se por figuras: gráficos, mapas, fotografias, etc.) devem ser numeradas sequencialmente em algarismos arábicos. Cada tabela e figura, além da numeração, deve possuir um título autoexplicativo apropriado, colocado centralizado, acima da tabela e abaixo da figura. Tanto a tabela quanto a figura deverão ter a especificação da **FONTE**, posicionada na parte inferior, conforme ilustrado neste template.
-
-## Figuras
-
-Figuras devem ser centralizadas, conforme ilustrado na @fig-Figura1. Toda figura deve apresentar os elementos mínimos conforme apresentado neste modelo. A @fig-Figura1 ilustra a formatação requerida.
-
-Todas as figuras devem trazer a respectiva fonte. A @fig-Figura1 rornece um exemplo padrão para a formatação da fonte.
-
-![Logo do Seminário Internacional de Estatística com R - SER. Fonte: \@NomeDaReferencia.](Figura1.png){#fig-Figura1 width="37.5%" fig-align="center" fig.cap="center"}
-
-Caso a figura ou tabela seja de própria autoria, então utilizar *Fonte: Os autores.* conforme mostrado na @fig-Figura2, a seguir:
-
-![Logo do Seminário Internacional de Estatística com R - SER. Fonte: Os autores.](Figura1.png){#fig-Figura2 width="37.5%" fig-align="center" fig.cap="center"}
-
-Figuras construídas com o RPosit utilizando o *quarto* podem ser formatadas e referenciadas conforme o modelo a seguir.
+-   Instalar os seguintes pacotes:
 
 ```{r}
-#| label: Figura3
-#| echo: false
-#| warning: FALSE
-#| message: FALSE
-#| fig-cap: "Exemplo de figura produzida diretamente com R. Fonte: @hadley."
-#| fig-alt: "Disponível em https://quarto.org/docs/get-started/computations/rstudio.html."
-#| fig-width: 5
-#| fig-height: 2.75
-if(!require(ggplot2)){install.packages("ggplot2")}
-p=ggplot(mpg, aes(x = hwy, y = cty, color = cyl)) +
-  geom_point(alpha = 0.5, size = 2) +
-  scale_color_viridis_c() +
-  theme_minimal()
-p
-ggsave("Figura3.png",plot = p,width = 5, height =2.75, dpi = 300,units="in")
-
-```
-
-Note que o código também salva a respectiva figura em formato *.png*, nomeando de acordo com a ordem em que a figura aparece no texto, ou seja, esta é a terceira figura do texto e pode ser referenciada por meio do comando \@fig-Figura3.
-
-Os códigos podem ser inseridos no texto conforme o seguinte exemplo:
-
-```{r}
-#| label: Code01
+#| label: code_01
 #| echo: true
 #| eval: false
-if(!require(ggplot2)){install.packages("ggplot2")}
-ggplot(mpg, aes(x = hwy, y = cty, color = cyl)) +
-  geom_point(alpha = 0.5, size = 2) +
-  scale_color_viridis_c() +
-  theme_minimal()
+pacotes <- c("tidyverse", "quarto", "rmarkdown", "dados", "reactable")
+install.packages(pacotes)
 ```
 
-Neste caso, o código não é avaliado para gerar resultados.
+Vale ressaltar que cada sistema operacional (SO) possui especificidades de instalação, portanto, é importante verificar as configurações do SO durante as instalações.
 
-## Tabelas
+Orientações sobre a utilização do RStudio com Quarto estão disponíveis na página do [Quarto.org](https://quarto.org/docs/get-started/hello/rstudio.html). Outra opção é utilizar o *Posit Cloud*, que possibilita a utilização da IDE do RStudio na nuvem através do [site](https://posit.cloud/) da Posit. O passo a passo está descrito também em @quarto-rladies.
 
-Aqui estão algumas orientações para inserção de tabelas. Sugerimos utilizar pacotes disponíveis no CRAN para formatação das tabelas-prefira formatações simples. Sugerimos o pacote *gt* para geração das tabelas devido possibilidade de inserir os elementos essenciais. A @tbl-tab01 é um exemplo de tabela de dados com *caption* e fonte.
+## Estrutura {#sec-estrutura}
+
+Para o desenvolvimento do *Quarto book* é importante o entendimento sobre a estrutura que o compõe, que pode ser resumida em três partes principais, conforme @fig-Figura01:
+
+![Estrutura. Fonte: A autora.](img/Figura01.png){#fig-Figura01 fig.cap="center" fig-align="center" width="70%"}
+
+-   YAML (*Yet Another Markup Language*): local onde são inseridos os metadados sobre o documento (formatação, data, título, autor, entre outros). Nele, é possível configurar a aparência do documento, bem como especificar quais serão os formatos de saída (HTML, pdf, Word, etc);
+
+-   Texto: usa *Markdown* como sua sintaxe de documento principal;
+
+-   Códigos: versão multilíngue, portanto, nos *chunks* (blocos de códigos) podemos inserir códigos em `R`, Python, Julia e outros.
+
+Partindo do entendimento da estrutura comum entre os documentos desenvolvidos em Quarto, parte-se para a criação do *Quarto book*. As configurações do livro estão contidas em um arquivo separado que estará localizado no **diretório do projeto**, que é denominado `_quarto.yml`.
+
+Este arquivo contém a configuração inicial do livro e é onde são inseridas configurações sobre o documento (formatação, data, título, autor, entre outros). Para exemplificar, a @fig-Figura02 mostra algumas configurações do `_quarto.yml`. Alguns pontos cabem destaque nas configurações do *Quarto book*: **(1)** a estrutura do YAML é baseada em indentação, portanto, é importante que as configurações estejam corretamente indentadas, caso contrário, aparecerá alguma mensagem de erro durante a renderização do livro; **(2)** o Quarto *book* pode ser configurado com diferentes formatos de saída, entretanto, caso seu arquivo contenha alguma funcionalidade específica de um dos formatos, possivelmente não irá funcionar exitosamente em outro formato (como, por exemplo, a utilização de gráficos interativos no formato HTML, que não funcionarão em pdf).
+
+![Tela do `_quarto.yml`. Fonte: A autora.](img/Figura02.png){#fig-Figura02 fig.cap="center" fig-align="center" width="35%"}
+
+Cabe destacar que o Quarto é baseado no Pandoc, assim, na fase de composição do conteúdo no livro, a sintaxe básica é **markdown**. Conforme apresentado na documentação do @quarto-markdown,
+
+> *"o markdown do Pandoc é uma versão estendida e ligeiramente revisada da sintaxe Markdown de John @john"*.
+
+Portanto, para pessoas que devolvem documentos com Markdown/R Markdown, a sintaxe será a mesma em algumas estruturas. Na @sec-markdown será abordado algumas sintaxes básicas para personalização do texto.
+
+### Markdown {#sec-markdown}
+
+Nesta seção serão apresentadas algumas das possíveis configurações para personalização do texto. A primeira consiste em criar títulos/subtítulos (ou seções e subseções), que são estruturadas conforme a quantidade de caractere `#`, seguido do texto desejado, conforme apresentado na @fig-Figura03. Ressalta-se que pode criar até seis níveis distintos com as `#`. Observe que, à medida que aumenta a quantidade de `#`, menor será o nível do título/subtítulos.
+
+\newpage
+
+![Títulos/Subtítulos ou Seções/Subseções. Fonte: A autora.](img/Figura03.png){#fig-Figura03 fig-align="center" width="450"}
+
+Outras configurações básicas para o texto estão disponíveis no esquemático da @fig-Figura04:
+
+![Estruturas para o texto. Fonte: A autora.](img/Figura04.png){#fig-Figura04 fig-align="center" width="560"}
+
+Para a personalização dos textos, existem diversas possibilidades, com detalhes disponíveis na documentação do @quarto-markdown.
+
+\newpage
+
+Além disso, outra praticidade na construção de um livro com Quarto é a inserção de referências cruzadas, que facilitam a navegação dos leitores em seu documento, possibilitando a criação de referências numeradas automaticamente para `exemplos`, `exercícios`, `definições`, `corolários` e outros. A @fig-Figura05 apresenta algumas estruturas, que podem ser criadas com o caractere `#` no prefixo.
+
+![Nomenclaturas e referências. Fonte: @quarto-ref.](img/Figura05.png){#fig-Figura05 fig-align="center" width="200"}
+
+Assim, por exemplo, caso queira queira criar um exercício, basta inserir o prefixo `#exr-`, conforme o código:
+
+``` markdown
+::: {#exr-exercicio01}
+Enunciado do meu exercício aqui. Enunciado do meu exercício aqui. 
+:::
+
+::: callout-note
+## Solução
+Solução do meu exercício aqui. Solução do meu exercício aqui. 
+:::
+```
+
+Como resultado do código acima no Quarto *book* será:
+
+::: {#exr-exercicio01}
+Enunciado do meu exercício aqui. Enunciado do meu exercício aqui.
+:::
+
+::: callout-note
+## Solução
+
+Solução do meu exercício aqui. Solução do meu exercício aqui.
+:::
+
+### Código {#sec-codigo}
+
+As saídas para os blocos de códigos (*chunks*) podem ser personalizadas de diversas formas. É possível modificar a largura e altura de gráficos, por exemplo, bem como ocultar a apresentação dos códigos em seu documento, deixando apenas os resultados. Para tanto, os argumentos podem ser inseridos precedidos de `#|`, conforme o exemplo a seguir:
+
+```{{r}}
+#| fig-width: 4
+#| fig-height: 2
+#| warning: false
+#| fig-align: "center"
+
+library(ggplot2)
+plot <- ggplot(iris, 
+  aes(x = Species,
+      y =  Sepal.Length)) + 
+  geom_boxplot(aes(fill = Species)) +
+  xlab("Espécies") + 
+  ylab("Sepal Length") + 
+  theme_grey();plot
+```
 
 ```{r}
-#| label: tbl-tab01
-#| tbl-cap: Tabela de Dados
+#| label: code_02
+#| fig-width: 4
+#| fig-height: 2
+#| warning: false
+#| fig-align: "center"
 #| echo: false
-library("gt")
-# Create a display table based on `iris`
-iris_tbl <- gt(head(iris)) %>%
-  tab_spanner_delim(delim = ".") %>%
-  cols_move_to_start(columns = Species) %>%
-  fmt_number(
-    columns = c(Sepal.Length, Sepal.Width, Petal.Length, Petal.Width),
-    decimals = 1
-  ) %>%
-  #tab_header(
-  #  title = md("Título, se necessário"),
-  #  subtitle = md("[subtítulo, se necessário]")
-  #) %>%
-  #tab_header(
-  #  title = md("Table 1: Example table")
-  #) %>%
-  tab_source_note(
-    source_note = md("Fonte: NOME (ANO).")
-  )
 
-iris_tbl
-
-
+library(ggplot2)
+plot <- ggplot(iris, 
+  aes(x = Species,
+      y =  Sepal.Length)) + 
+  geom_boxplot(aes(fill = Species)) +
+  xlab("Espécies") + 
+  ylab("Sepal Length") + 
+  theme_grey();plot
 ```
 
-## Exemplos de arquivos .bib {#sec-exemplo}
+Note que foi definida uma largura (*fig-width*), altura (*fig-height*), alinhamento (*fig-align*) e evitou-se que avisos gerados pelo código apareçam no documento utilizando `warning: false`.
 
-Os arquivos *.bib* devem estar preenchidos com os elementos disponíveis de acordo com a normatização ABNT vigente. Exemplos de entradas *.bib* podem ser encontradas no arquivo *References.bib*.
+Diversas configurações podem ser utilizadas nos *chunks* e na @fig-Figura06 apresenta-se algumas possibilidades:
 
--   Entrada *.bib* para um livro (@hadley):
+\newpage 
 
-```{verbatim}
-@Book{hadley,
-    author = {Hadley Wickham},
-    title = {ggplot2: Elegant Graphics for Data Analysis},
-    publisher = {Springer-Verlag New York},
-    year = {2016},
-    isbn = {978-3-319-24277-4},
-    url = {https://ggplot2.tidyverse.org},
-  }
+![Configurações de blocos de código. Fonte: @quarto-code.](img/Figura06.png){#fig-Figura06 fig-align="center" width="590" height="430"}
+
+
+### Quarto Pub {#sec-quarto-pub}
+
+O Quarto Pub é um serviço gratuito de publicação de conteúdo criado com o Quarto. Os documentos criados são **visíveis publicamente** e fáceis para publicar. Para a publicação, alguns passos devem ser seguidos:
+
+Passo 1) Criar uma conta gratuita no [Quarto Pub](https://quartopub.com);
+
+<!-- ![Página Quarto Pub. Fonte: @quarto-pub.](img/Figura14.png){#fig-Figura14 fig-align="center"} -->
+
+Passo 2) Executar o comando no **Terminal**:
+
+``` {.default shortcodes="false"}
+quarto publish quarto-pub
 ```
 
--   Entrada *.bib* para um manual (@rcore):
+![Configuração no terminal. Fonte: A autora.](img/Figura07.png){#fig-Figura07 fig-align="center" width="380" height="130"}
 
-```{verbatim}
-  
-@Manual{rcore,
-     title = {R: A Language and Environment for Statistical Computing},
-     author = {{R CORE TEAM}},
-     organization = {R Foundation for Statistical Computing},
-     address = {Vienna, Austria},
-     year = {2021},
-     url = {https://www.R-project.org/},
-     }
+
+Passo 3) Aguardar e seguir as instruções que aparecerão na tela:
+
+``` {.default shortcodes="false"}
+$ quarto publish quarto-pub
+? Authorize (Y/n) › 
+❯ In order to publish to Quarto Pub you need to
+  authorize your account. Please be sure you are
+  logged into the correct Quarto Pub account in 
+  your default web browser, then press Enter or 
+  'Y' to authorize.
 ```
 
--   Entrada *.bib* para um manual (@fernando):
+Passo 4) Após autorização e autenticação na conta, volte ao RStudio para confirmar que deseja publicar;
 
-```{verbatim}
-  
-@Internet{fernando,
-   author={F. G. PILOTTO},
-   title={Estilo BibTeX com as Normas da ABNT},
-   url={http://www.if.ufrgs.br/hadrons/abnt/abntdoc.tex},
-   note={Acessado em: 11 abr. 2003 },
-   internetaddress={http://www.if.ufrgs.br/hadrons/abnt/abntdoc.tex},
-   day=11,
-   month=abr,
-   year=2023
-}
+Passo 5) Aguardar renderizar e implantar. Em seguida, uma janela do seu navegador será aberta e o seu conteúdo estará pronto para visualização.
 
+Os detalhes de publicação no Quarto Pub podem ser visualizados através do [link](https://ariane.quarto.pub/rladies_goiania/#/quarto-pub-1). Em face às etapas de desenvolvimento abordadas nesta subseção, destaca-se a possibilidade de publicação não somente do *Quarto Book*, mas também de *blogs* e demais documentos desenvolvidos com Quarto.
+
+
+# Resultados e Discussão {#sec-resultados}
+
+Nesta seção apresenta-se os resultados obtidos no desenvolvimento de um modelo prático de um livro desenvolvido com *Quarto Book*. Todos os códigos e pastas relacionadas ao modelo apresentado podem ser acessados no repositório disponível em @github-ser. Na Figura @fig-Figura08 é possível visualizar a capa do livro:
+
+\newpage 
+
+![Capa do modelo. Fonte: A autora.](img/Figura08.png){#fig-Figura08 fig-align="center"}
+
+
+Perceba que metadados e outras informações são dispostas na capa, sendo possível a inserção de autores, imagens, índice entre outras. Tais configurações são inseridas no arquivo `_quarto.yml`, que contém:
+
+``` markdown
+project:
+  type: book
+  output-dir: docs 
+
+bibliography: references.bib # Referências
+lang: pt # Idioma: português (pt)
+
+
+book:
+  title: "Contando histórias com Quarto" # Título do livro
+  subtitle: "Quarto Book" # Subtítulo do livro
+  author: 
+    - name: "Ariane Hayana" # Nome Autor(a) 1
+      orcid: "0000-0003-1571-8739" # ORCID Autor(a) 1
+    - name: "Autor 2" # Nome Autor(a) 2
+      orcid: "0000-0000-0000-0000" # ORCID Autor(a) 2
+    - name: "Autor 3" # Nome Autor(a) 3
+      orcid: "0000-0000-0000-0000" # ORCID Autor(a) 3     
+  date: "04/28/2023" # Inserir no formato mm/dd/yyyy
+  favicon: logo.png # Ícone na aba do navegador
+
+  sidebar: 
+    style: docked # Estilo: 'docked' ou 'floating'
+  search: true
+  repo-url: https://github.com/a-hayana/ser2023 # Url do repositório 
+  sharing: [twitter, facebook, linkedin] # Redes que deseja compartilhar
+  reader-mode: true # Se 'true', oculta a barra lateral e o sumário
+  page-footer: 
+    left: "SER | Seminário Internacional de Estatística com `R`" # Rodapé esquerdo
+    right: "Por: Ariane Hayana" # Rodapé direito
+  chapters:
+    - index.qmd
+    - introducao.qmd
+    - desenvolvimento.qmd
+    - referencias.qmd
+
+format:
+  html:
+    theme:
+      light: [united,theme.scss]
+      dark: superhero
+    cover-image: logo.png
+editor: visual
 ```
 
-# Referências {#sec-referências}
+Note que o formato do livro foi definido em `HTML`, porém, outras configurações são possíveis, tais como `.pdf` e `.epub`, por exemplo. Após definidas as configurações desejadas, partiu-se para etapa de criação dos capítulos do livro, que ficam acessíveis na barra lateral esquerda da @fig-Figura08. Em cada capítulo foram inseridas os seguintes conteúdos:
+
+-   **Introdução** - Neste capítulo, foram dispostos no modelo de criação:
+
+\newpage
+
+![Capítulo *Introdução*. Fonte: A autora.](img/Figura09.png){#fig-Figura09 fig-align="center"}
+
+Veja que neste capítulo foi possível inserir o texto, bem como referenciar outros capítulos, além de poder introduzir uma tabela interativa criada com o pacote `reactable` [@reactable] e com dados oriundos do pacote `dados` [@dados]. Para tornar o texto mais limpo, os códigos da tabela foram ocultados utilizando no *chunk* `code-fold: true`. É possível navegar entre os capítulos ao final da página.
+
+-   **Desenvolvimento** - No desenvolvimento, além da parte textual, os conteúdos foram divididos em subseções (conforme apresentado na @sec-markdown). Outra aplicação interessante é a utilização de abas para apresentar conteúdos diversos, sem sair do capítulo. Este trecho foi desenvolvido com a utilização do `panel-tabset`, conforme o trecho do código a seguir:
+
+``` md
+::: panel-tabset
+## Aba 1
+![](img/img1.png){fig-align="center"}
+
+## Aba 2
+![](img/img2.png){fig-align="center"}
+:::
+```
+
+Note que para cada aba é definido um título que aparecerá na parte superior e dará acesso para cada conteúdo.
+
+Também temos a possibilidade de inserir equações, criar exemplos e exercícios. No exemplo do modelo temos um exercício e solução, conforme apresentado:
+
+::: {#exr-x}
+Suponha que as notas de uma turma de 5 alunos foram: 6, 7, 8, 9 e 10. Calcule a média.
+:::
+
+::: callout-note
+## Solução
+
+Para calcular a média das notas, podemos usar a seguinte fórmula:
+
+Média = $\frac{\text{soma das notas}}{\text{número de alunos}}$
+
+Para calcular a média, podemos seguir os seguintes passos:
+
+Soma = $6 + 7 + 8 + 9 + 10 = 40$
+
+Média = $\frac{\text{soma}}{\text{número de alunos}} = \frac{40}{5} = 8$
+
+Portanto, a média das notas da turma é 8.
+:::
+
+Outro ponto relevante é a praticidade de inserção de referências e citações no *Quarto Book*, cujas referências são citadas e referenciadas em um arquivo `.bib`, onde serão preenchidas as informações de autores(as), sendo possível também a citação de pacotes, livros, artigos, entre outros. Tais elementos podem ser dispostos conforme a normatização desejada e aparecerão no capítulo *Referências* padronizados conforme mostra a @fig-Figura10:
+
+![Exemplo de *Referências* no *Quarto Book*. Fonte: A autora.](img/Figura10.png){#fig-Figura10 fig-align="center"}
+
+Finalizadas todas as etapas de criação, ao final parte-se para a publicação do material criado no Quarto Pub. Seguindo as etapas sugeridas na @sec-quarto-pub, ao final, o livro estará disponível para acesso em qualquer navegador. No exemplo deste livro modelo, o mesmo está acessível no endereço <https://ariane.quarto.pub/contando-historias-com-quarto/>.
+
+
+# Conclusão {#sec-conclusao}
+
+Neste capítulo apresentou-se orientações e definições de como desenvolver um *Quarto Book*. Foram abordados conceitos iniciais, explorando desde a instalação do Quarto até a etapa de publicação do livro no Quarto Pub. Dentre as principais contribuições, destaca-se a possibilidade de automatizar conteúdos, além de trazer interatividade e compartilhamento de informações através da publicação do conteúdo criado no Quarto Pub. Viu-se neste capítulo algumas das diversas possibilidades de criação e personalização de um livro desenvolvido com Quarto, e assim como qualquer outra ferramenta, é importante destacar que o ingrediente principal para o aprendizado do Quarto é a *curiosidade* em explorar a rica documentação disponível no [Quarto.org](https://quarto.org/). 
+
+
+# Referências {#sec-referencias}
