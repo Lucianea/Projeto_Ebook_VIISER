@@ -1,0 +1,370 @@
+---
+title: Editando os gráficos do pacote Likert
+subtitle: apresentação do VII - SER
+titlerunning: Short form of title (if too long for head)
+authorrunning:
+  Short form of author list if too long for running head
+lang: pt
+style: justify
+#csl: apa.csl
+number-sections: true
+thanks: |
+  Agradecimentos ou outras notas sobre o capítulo devem ser colocadas aqui. Agradecimentos gerais 
+  devem ser colocados no fim do capítulo. 
+authors:
+  - name: Ariel Levy
+    address: Departamento de Aministração, Universidade Federal Fluminense
+    email: alevy@id.uff.br
+  - name: Marcus Antonio Cardoso Ramalho 
+    address: PPGAD, Universidade Federal Fluminense
+    email: marcusantonio@id.uff.br
+abstract: |
+  **Contexto**: A maioria dos pesquisadores ou analistas se deparam com dados em idiomas diferentes daqueles em que produzem seus relatórios. A situação  não é diferente quando os dados se apresentam no formato de uma escala Likert.
+  **Lacuna**: Embora existam muitos instrumentos que permitam a análise deste tipo de pesquisa, é no R, através do pacote _likert_, que são facilmente elaborados e incorporados a um relatório.  
+  **Objetivo**: O objetivo é guiar a estruturação de uma pesquisa com escala Likert, desde a formulação do questionário até a análise com o pacote _likert_ no R.
+  **Metodologia**: Utilizanos o _Quarto_ [@Allaire_Quarto_2022]na construção do documento e os pacotes _likert_ [@bryer2016], _gt_ [@iannone2023], _tidyverse_ [@wickham2019] e _scales_ [@wickham2022] na manipulação dos dados e elaboração dos gráficos e tabelas. A base de dados utilizada foi a do PISA 2009  [@programa2010], disponível no pacote _likert_.
+  **Limitações**: O pacote _likert_ data de 2016 no CRAN e apesar de suas atualizações alguns recursos não estão em pleno funcionamento. 
+  **Contribuições**: Detalhamos as etapas e construção de uma pesquisa Likert, incluindo um roteiro que facilite a análise dos resultados confrontando com a teoria. Na parte dos códigos procuramos empregar os conceitos atualizados utilizando o tidyverse e sempre que possível nos remetendo à base do pacote _likert_.
+  **Estudos futuros**: Para as próximas etapas procuraremos completar a análise focando em pacotes que permitam o tratamento das variáveis categóricas.
+  
+  **Palavras Chave**: Likert; Variáveis categóricas; _ggplot2_; _dplyr_; Funções.
+
+format: pdf
+editor: visual
+execute:
+  fig-width: 12
+  fig-height: 6
+  warning: false
+  message: false
+
+bibliography: references.bib
+---
+
+# Introdução
+
+Quem respondeu ou elaborou uma pesquisa provavelmente já se deparou com uma escala Likert. Embora, a utilização de um questionário no formato Likert encontra-se amplamente explorado na literatura, nosso objetivo será elucidar algumas questões e tratamentos desde a formulação do questionário até a análise descritiva dos dados com a utilização do pacote *likert* disponível para linguagem R [@rlang].
+
+Motivadas por curiosidade ou para tomar decisões, as pessoas com frequência desejam ou precisam conhecer o que os outros pensam e como se sentem em relação aos mais variados temas, produtos e serviços. Então, utilizam-se de experimentos para coletar essas informações. Um dos formatos mais usuais para obtenção das respostas é uma escala Likert que apresenta normalmente cinco pontos, podendo variar de 3 a 9. Por exemplo, variando de "discordo totalmente" a "concordo totalmente". Outras variações destes descritores textuais são possíveis, conforme o que se deseja medir, como a frequência, a importância ou probabilidade da ocorrência de um evento.
+
+Esta escala tem utilização nas ciências sociais onde é predominante. A escala psicométrica foi criada por Remus Likert em 1932, com a finalidade de melhor representar as opiniões quando comparada aos itens dicotômicos, sim e não, utilizados até então. Assim, através das respostas os prospectos podem expressar a discordância ou concordância, ou mesmo sua neutralidade, ou não aplicabilidade do item em questão.
+
+Com isso explicado, é importante lembrar que os dados do tipo Likert são categóricos ordinais. Ainda que, possam ser representados por números, só se pode afirmar que uma pontuação é maior do que outra, e nada sobre a distância entre os pontos. Embora, haja aqueles que defendem a conversão dos dados ordinais em dados contínuos, o que não é recomendado, pois essa conversão poderá acarretar conclusões errôneas. Por exemplo, se uma pessoa responde 5 em uma escala de 1 a 7, não significa que ela concorda mais do que alguém que respondeu 4. Assim, a média não será uma medida de posição adequada do grupo de respondentes em relação a esta afirmativa ou questão. Utilizar a mediana ou a moda será mais recomendado [@Sullivan2013].
+
+## Objetivo
+
+Apesar de populares e amplamente utilizadas, as escalas Likert são frequentemente mal interpretadas. Neste capítulo o objetivo é estruturar uma pesquisa que utilize a escala Likert desde sua formulação até a análise descritiva com o pacote Likert da linguagem R. Para isso, será apresentado o processo de elaboração de um questionário, a aplicação e a análise descritiva dos dados com o pacote *likert*.
+
+## Aplicação
+
+Ao iniciar sua pesquisa, busque a literatura disponível sobre o tema que você pretende pesquisar, procure identificar se há revisões sistemáticas, quais os pesquisadores mais citados, principais revistas científicas, etc. Desse modo, abreviará o esforço de produzir seu referencial teórico. Igualmente importante será verificar a existência de dados secundários, ou seja, se já existe alguma pesquisa que corrobora com dados, ou questionários validados no seu tema. Quais as lacunas ainda precisam ser preenchidas e quais são as contribuições que você pretende com sua pesquisa, como sua pesquisa irá se diferenciar das demais e como as complementará ou aprofundará.
+
+Normalmente, o processo de uma pesquisa envolve as seguintes etapas: definição do problema, o desenvolvimento do problema, a formulação do objeto de pesquisa, a realização do trabalho de campo e coleta dos dados, a seleção e análise dos dados e por fim a preparação do relatório.
+
+::: {#fig-likert fig-cap="Fluxo do trabalho - Adaptado de [@malhotra2006]."}
+```{mermaid}
+%%| fig-width: 8
+graph LR
+A[Definição <br> do problema]-->B[Desenvolvimento <br> do problema]
+B-->C[Formulação do <br>  projeto de <br> pesquisa]
+C-->D[Realização do <br> trabalho de campo <br> e coleta de dados]
+D-->E[Seleção e análise <br> de dados]
+E-->F[Preparação e <br> apresentação do <br> relatório]
+```
+:::
+
+Na sequência da revisão da literatura o problema estará mais definido, tanto quanto às questões a serem respondidas, bem como, quanto às limitações às quais o pesquisador estará sujeito.
+
+Antes de partir para a elaboração do questionário é necessário ter conhecimento do contexto e das experiências similares relatadas na literatura. Procurando estabelecer vínculos ao desenvolver suas hipóteses.
+
+A elaboração do questionário é uma etapa importante, pois é a partir dele que você irá coletar os dados para sua pesquisa. Assim, é fundamental que você tenha clareza sobre o que pretende pesquisar e quais as questões que você pretende responder com sua pesquisa.
+
+Ao formular uma pergunta para seu questionário você deverá alinhar: o item, afirmação que se está solicitando ao prospecto resposta; a hipótese que se estará testando e sua justificativa, conforme a literatura estudada. Respeite este formato para cada item do seu questionário. Isto facilitará a análise dos dados e a interpretação dos resultados e evitará um número excessivo de itens.
+
+Estruture os itens de forma organizada e coerente, de modo que o questionário tenha uma sequência lógica e que seja de fácil compreensão para o respondente. Evite perguntas que possam ser interpretadas de forma ambígua. Evite também perguntas que possam ser interpretadas erroneamente por diferentes grupos ou origens. A clareza e organização irão agregar valor a sua pesquisa.
+
+O pacote likert [@bryer2016] da linguagem R [@rlang] apresenta um conjunto de funções capaz de facilitar uma análise a partir de visualizações das respostas dos itens de forma isolada ou em conjunto. Este pacote traz um banco de dados exemplo de respostas da pesquisa de 2009 do PISA, Programa Internacional de Avaliação de Estudantes, que é um estudo internacional comparativo coordenado pela OCDE, Organização para Cooperação e Desenvolvimento Econômico, realizado a cada três anos, que tem como objetivo avaliar o desempenho de estudantes de 15 anos em leitura, matemática e ciências. O PISA 2009 [@programa2010] foi aplicado em 74 países e economias, incluindo o Brasil, onde a coordenação é do INEP, Instituto Nacional de Estudos Anísio Teixeira.
+
+Então, ao utilizar este estudo apresentado como exemplo de dados secundários enfrentaremos alguns desafios para adaptar o questionário a nossa pesquisa e posterior publicação no nosso idioma. Este é um pequeno obstáculo que você poderá enfrentar ao utilizar dados secundários em uma língua estrangeira ou mesmo ao buscar publicar sua pesquisa com dados em português em um periódico internacional.
+
+Um editor de periódico certamente irá solicitar que o questionário, seus gráficos e figuras sejam apresentados no idioma do mesmo, o que não é uma tarefa simples, pois, o questionário original foi elaborado em outro idioma e para que seja traduzido será necessário um bom conhecimento do idioma de destino com o uso de expressões e termos adequados. Além disso, é importante que o questionário traduzido seja validado, o que não será abordado neste capítulo.
+
+A seguir, adequaremos a partir do questionário original e das soluções obtidas através do pacote *likert* para o português.
+
+# Resultados e discussão
+
+Apresentaremos a seguir os resultados e discussão a partir do questionário original, do PISA 2009 e das soluções obtidas através pacote *likert* para o português.
+
+Antes de adotar qualquer solução é importante que você tenha os pacotes instalados e carregados no R. Para isso, utilize o comando *install.packages("likert")* e *library(likert)*, respectivamente, ou utilize as instruções mostradas código abaixo.
+
+```{r pacotes}
+
+if (!require(pacman)) install.packages("pacman")
+pacman::p_load(likert, gt, tidyverse, scales)
+```
+
+A primeira instrução verifica se o pacote *pacman* encontra-se instalado, caso não esteja, o pacote será instalado e carregado. A segunda instrução fará o mesmo com os pacotes *likert* [@bryer2016], *gt* [@iannone2023], *tidyverse* [@wickham2019] e *scales* [@wickham2022], que utilizaremos oportunamente.
+
+Como o banco de dados do PISA que se encontra disponível no pacote *likert* é extenso, com 81 colunas que representam as afirmações codificadas, itens, e 66690 respostas dos estudantes, linhas. Seus metadados estão disponíveis no pacote likert e podem ser acessados através do comando: *?pisaitems*.
+
+Analisaremos um dos itens para verificar sua distribuição e as opções da variável conforme mostrado.
+
+```{r ST24Q01}
+
+data(pisaitems)
+group_by(pisaitems, ST24Q01) %>%
+    summarise(n = n())
+
+```
+
+Podemos observar que a variável *ST24Q01*, correspondente a um dos itens, apresenta 4 opções de respostas, que são: "Discordo totalmente" (14947), "Discordo" (23515), "Concordo" (20000), "Concordo totalmente"(7029), na forma original, e o R adicionou o "NA"(1199). Estes resultados representam a contagem de respostas para cada uma das opções. E a resposta "NA" corresponde aos dados faltantes, que refere-se aos indivíduos que deixaram de responder a questão.
+
+Escolhemos apenas algumas variáveis para exemplificar a utilização do pacote seguindo o mesmo procedimento adotado por @komperda2017 de quem nos diferenciaremos ao utilizarmos *tidyverse* [@wickham2019]. Com a utilização da função *select()* do pacote *dplyr*, iremos selecionar as variáveis que serão utilizadas em nosso exemplo. Com estas variáveis selecionadas, criaremos um banco de dados que denominamos mini_pisa.
+
+```{r tidyvese select minipisa}
+mini_pisa <- select(pisaitems, c(CNT, ST24Q01:ST24Q06))
+
+glimpse(mini_pisa)
+
+```
+
+A função *dplyr::glimpse()*, notação que informa que a função glimpse pertence ao pacote *dplyr*, apresenta um resumo do banco de dados, com o nome das variáveis, o tipo de variável e as primeiras observações. A partir deste resumo podemos observar que as variáveis são categóricas, que no R são representadas pelo tipo factor, com quatro níveis de respostas, todas com características iguais às examinadas anteriormente.
+
+Ficaria muito difícil analisar as respostas com os itens representados pelas variáveis codificadas. Procederemos a troca dos rótulos dos itens que serão utilizados por padrão nos gráficos, com a função *dplyr::rename()*. E neste caso já poderíamos traduzi-los para o português.
+
+*ST24Q01: I read only if I have to*. / Eu leio apenas se eu tiver que.
+
+*ST24Q02: Reading is one of my favorite hobbies*. / Ler é um dos meus hobbies favoritos.
+
+*ST24Q03: I like talking about books with other people*. / Eu gosto de conversar sobre livros com outras pessoas.
+
+*ST24Q04: I find it hard to finish books*. / Eu acho difícil terminar livros.
+
+*ST24Q05: I feel happy if I receive a book as a present*. / Eu fico feliz se eu receber um livro de presente.
+
+*ST24Q06: For me, reading is a waste of time*. / Para mim, ler é uma perda de tempo.
+
+```{r  mini_pisa_t1}
+mini_pisa_t1 <- rename(mini_pisa,
+    "País" = CNT,
+    "Eu leio apenas se eu tiver que" = ST24Q01,
+    "Ler é um dos meus hobbies favoritos." = ST24Q02,
+    " Eu gosto de conversar sobre livros com outras pessoas." = ST24Q03,
+    "Eu acho difícil terminar livros." = ST24Q04,
+    "Eu fico feliz se eu receber um livro de presente." = ST24Q05,
+    "Para mim, ler é uma perda de tempo." = ST24Q06
+)
+glimpse(mini_pisa_t1)
+```
+
+Iniciaremos selecionando as variáveis da base cujos rótulos estão traduzidos e atribuímos ao objeto criado *likert_out* utlizando a função *dplyr::select()*. A seguir, iremos utilizar a função *likert::likert()*, cujo primeiro argumento é o banco de dados que será utilizado esta deverá ser um data frame, a função não aceita um *tibble*. O objeto de saída do pacote likert será atribuído ao objeto *likert_out*.
+
+```{r likert-out1}
+#| results: hide
+
+likert_out <- select(mini_pisa_t1, 2:6)
+likert_out <- likert(as.data.frame(likert_out))
+plot(likert_out) + # os eixos são trocados no likert_out
+    labs(y = "Porcentagem") +
+    guides(fill = guide_legend("Respostas"))
+```
+
+O pacote apresenta um gráfico de desenho moderno e de fácil interpretação onde as perguntas partem da neutralidade, centro das quatro opções embora não ofertada ao respondente, e mostram suas posições. Veja que ao final da instrução plot utilizamos o *"+"* característico da adição de *layers* com o pacote *ggplot2* o que nos remete que a base dos gráficos no pacote likert utiliza ele como base. Entretanto, um olhar mais cuidadoso observará que tanto o rótulo dos eixo *x* como a legenda e suas opções de respostas aparecem em inglês.
+
+Além dessa correção iremos alterar as cores do gráfico, objetivo que pode ser realizado de diversas formas, através do uso de paletas, pelo nome das cores ou pelos códigos. Também reforçamos que a legenda apareça numa ordem desejada. Este conjunto de alterações será alcançado a função *ggplot2::scale_fill_manual()* cuja sintaxe será simplificada pela utilização de dois objetos criados anteriormente *color* e *legend_order*. Os eixos terão seus rótulos corrigidos com a utilização do comando labs. Exploraremos na sequência um conjunto de opções presentes na função *theme()*, onde poderemos alterar: o tamanho da fonte , a posição da legenda, margens entre muitos outros parâmetros.
+
+```{r likert-out2}
+color <- c("firebrick", "#C08A8B", "#92C492", "forestgreen")
+
+legend_order <- c("Strongly disagree", "Disagree", "Agree", "Strongly agree")
+
+
+plot(likert_out,
+    centered = TRUE,
+) +
+    scale_fill_manual(
+        name = "Respostas",
+        values = color,
+        breaks = legend_order,
+        labels = c(
+            "discordo totalmente", "discordo",
+            "concordo", "concordo totalmente"
+        )
+    ) +
+    labs(y = "Porcentagem", x = "Itens") +
+    theme(
+        text = element_text(size = 11),
+        legend.position = "bottom",
+        legend.justification = "right",
+        legend.direction = "horizontal",
+        legend.margin = margin(t = 3),
+        axis.text.y = element_text(angle = 0),
+        legend.key.size = unit(0.5, "cm"),
+        legend.text = element_text(size = 11),
+        plot.margin = margin(t = 15, r = 5, b = 10, l = 5)
+    )
+```
+
+O pacote *likert* apresenta recursos para segmentação da análise, bastando atribuir a variável categórica na função *likert::likert()* ao parâmetro *grouping*. Na função *likert::plot()* com o parâmetro *group.order* podemos ordenar a apresentação no gráfico. E desta feita optamos pela função *ggplot2::scale_x_discrete()* com a qual trocaremos os rótulos dos países traduzindo-os no exemplo para o português.
+
+```{r 3países}
+
+likert_out_group <- likert(as.data.frame(mini_pisa_t1[, 2:4]),
+    grouping = mini_pisa_t1$País
+)
+
+plot(likert_out_group,
+    group.order =
+        c("Mexico", "Canada", "United States")
+) +
+    scale_x_discrete(labels = c("México", "Canadá", "Estados Unidos")) +
+    scale_fill_manual(
+        name = "Respostas",
+        values = color,
+        breaks = legend_order,
+        labels = c(
+            "discordo totalmente", "discordo",
+            "concordo", "concordo totalmente"
+        )
+    ) +
+
+    labs(y = "Percentagem", x = "Países")
+
+```
+
+Na sequência exploraremos outro recurso do pacote *likert*: um gráfico de calor.
+
+```{r likert_calor}
+likert_out <- select(mini_pisa_t1, 2:6)
+
+likert_out <- likert(as.data.frame(likert_out))
+
+(heat <- plot(likert_out, type = "heat"))
+```
+
+Aqui nos deparamos com uma coluna representando a média, contudo, conforme havíamos pontuado no início do capítulo a escala Likert se utiliza de variáveis categóricas e acreditamos que a média não seja uma medida de posição adequada. A retirada da coluna mean do gráfico no pacote Likert não é algo trivial e preferimos refazer o gráfico de calor utilizando o pacote *ggplot2*.
+
+```{r retirar coluna mean}
+dados_calor <- likert_out$results %>%
+    pivot_longer(cols = -Item) %>%
+    filter(name != "Mean") %>%
+    mutate(name = factor(name, levels = rev(unique(name)))) %>%
+    mutate(name = factor(name, levels = c(
+        "Strongly disagree",
+        "Disagree",
+        "Agree",
+        "Strongly agree"
+    )))
+```
+
+O objetivo do código apresentado é a retirada da coluna *mean* dos dados e ajustar a ordem das respostas. Assim, na primeira instrução criamos um objeto que denominamos *dados_calor*. Na sequência transformamos *likert_out\$results* de um dataframe largo para longo utilizando a função *pivot_longer()*. A manipulação que se segue filtra linhas indesejadas cujos o valor da coluna *name* são iguais a *Mean*. Finalizamos ao reordenar os níveis da variável categórica *name* presentes em *results* na ordem desejada.
+
+```{r gráfico de calor}
+
+dados_calor %>% ggplot(aes(x = name, y = Item, fill = value)) +
+    geom_tile() +
+    scale_fill_gradient2(
+        low = muted("red"), mid = "white",
+        high = muted("blue"), midpoint = 0
+    ) +
+    geom_text(aes(label = round(value, digits = 1))) +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+    scale_x_discrete(labels = c(
+        "Discordo totalmente", "Discordo",
+        "Concordo", "Concordo totalmente"
+    )) +
+    xlab("Respostas") +
+    ylab("Perguntas") +
+    guides(fill = guide_colorbar(title = "Valores"))
+
+```
+
+## Outra solução
+
+Outra solução para resolver o problema de publicar no idioma desejado pode ser alcançada se modificarmos os fatores. Então, criamos a função *translate_data()* que utiliza a função *dplyr::recode_factor()*[@wickham2023]. A função *recode_factor()* permite recodificar os fatores, ou seja modifica-lo ou reorganizá-lo. A função *translate_data()* retorna o banco de dados com a variável recodificada e foi utilizada para facilitar a leitura do código.
+
+```{r translate_data}
+
+# Define a função para traduzir os dados
+translate_data <- function(x) {
+    dplyr::recode_factor(x,
+        `Strongly disagree` = "Discordo totalmente",
+        `Disagree` = "Discordo",
+        `Neither agree nor disagree` = "Nem concordo nem discordo",
+        `Agree` = "Concordo",
+        `Strongly agree` = "Concordo totalmente"
+    )
+}
+```
+
+A seguir, iremos utilizar a função *dplyr::mutate()* para criar uma nova variável no banco de dados *mini_pisa_t1* traduzindo a base de dados para o português, e atribuímos o resultado a *minipisa_t2*.
+
+```{=tex}
+\begingroup
+\fontsize{10pt}{10pt}\selectfont
+```
+```{r mutate}
+# Translate the data using mutate and the translate_data function
+mini_pisa_t2 <- mini_pisa_t1 %>%
+    mutate(
+        across(
+            `Eu leio apenas se eu tiver que`:`Para mim, ler é uma perda de tempo.`,
+            ~ translate_data(.x)
+        )
+    )
+glimpse(mini_pisa_t2)
+```
+
+```{=tex}
+\endgroup
+```
+Visualizando o gráfico:
+
+```{r likert-out3}
+likert_out <- select(mini_pisa_t2, 2:6)
+likert_out <- likert(as.data.frame(likert_out))
+plot(likert_out) +
+    # os eixos são trocados no likert_out
+    labs(y = "Porcentagem") +
+    guides(fill = guide_legend("Respostas"))
+
+```
+
+## Tabelas
+
+Oportunamente ao apresentarmos os resultados de uma pesquisa necessitamos lançar mão de tabelas e o pacote *gt* nos possibilita este tratamento para os dados com extrema simplicidade.
+
+```{=tex}
+\begingroup
+\setlength{\LTleft}{0pt minus 500pt}
+\setlength{\LTright}{0pt minus 500pt}
+\fontsize{8pt}{9pt}\selectfont
+\addtolength{\tabcolsep}{-4pt}
+```
+```{r tabela_gt1}
+
+likert_out$results[, 2:5] <- round(likert_out$results[, 2:5], digits = 2)
+gt(likert_out$results) %>%
+    cols_label(`Discordo totalmente` = md("Discordo \n totalmente")) %>%
+    as_latex()
+```
+
+```{=tex}
+\endgroup
+```
+Finalizaremos este capítulo, na seção seguinte mas certamente haverão muitos outros recursos a explorar na análise de suas pesquisas com o R.
+
+# Conclusão:
+
+A proposta deste capítulo foi apresentar como contexto a pesquisa com a escala Likert quando os dados não estão no idioma desejado, e como utilizar minimamente o pacote *likert* para sua análise no ambiente *tidyverse* utilizando a linguagem R.
+
+Sugerimos um modo operacional que facilita a formulação do questionário e análise de suas hipóteses. Esse procedimento também será útil ao comparar seus resultados com outros trabalhos pertencentes ao seu referencial teórico.
+
+Um dos pacotes mais centrais nos estudos de pesquisas Likert utilizando a linguagem R tem sido o pacote de mesmo nome [@ropensci2023] . Porém, sua publicação no CRAN ocorreu em 2016. Assim, é possível que nem todos os recursos mostrados na documentação possam ser usados dependendo da versões do *ggplot2* e de outras dependências instaladas.
+
+Contudo, representa uma simplicidade de utilização que o mantém como uma das principais escolhas.
+
+Exploramos algumas de suas principais características sem esgotar todas as possibilidades e aproveitamos para brevemente introduzir algumas notações do R, e funções do pacote *tidyverse* [@wickham2019], bem como do pacote *gt* [@iannone2023].
+
+Para um próximo estudo sugerimos a continuidade da pesquisa para além de uma análise descritiva com a utilização de métodos mais adequados a análise de variáveis categóricas.
+
+# Referências {#sec-referências}
